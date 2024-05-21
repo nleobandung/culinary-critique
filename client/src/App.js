@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import bplate1 from "./bplate1.jpg";
 import DiningHallsPage from "./DiningHallsPage";
-import socialprofile from "../src/SocialMedia/socialprofile";
+import Socialprofile from "../src/SocialMedia/socialprofile";
 
 function App() {
   const [rating, setRating] = useState(0);
@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <socialprofile/>
+    <Socialprofile/>
     // <div className="App">
     //   {currentPage === "profile" && (
     //     <header className="App-header">
