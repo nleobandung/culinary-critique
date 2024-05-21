@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from './Components/NavigationBar/NavBar'
-import Background from "./Components/Background/background";
+import Navbar from './NavigationBar/NavBar'
+import Background from "./Background/background";
 
 function DiningHallsPage({ switchToProfilePage }) {
   const [searchQuery, setSearchQuery] = useState("");

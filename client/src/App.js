@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import bplate1 from "./bplate1.jpg";
-import DiningHallsPage from "./DiningHallsPage";
+import DiningHallsPage from "./Components/HomePage/DiningHallsPage";
 
 function App() {
   const [rating, setRating] = useState(0);
