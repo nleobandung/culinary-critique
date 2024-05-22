@@ -3,6 +3,7 @@ import "./App.css";
 import bplate1 from "./bplate1.jpg";
 import DiningHallsPage from "./DiningHallsPage";
 import Socialprofile from "../src/SocialMedia/socialprofile";
+import UserProfile from "../src/SocialMedia/socialprofile";
 
 function App() {
   const [rating, setRating] = useState(0);
@@ -22,7 +23,7 @@ function App() {
   };
 
   return (
-    <Socialprofile/>
+    <UserProfile/>
     // <div className="App">
     //   {currentPage === "profile" && (
     //     <header className="App-header">
