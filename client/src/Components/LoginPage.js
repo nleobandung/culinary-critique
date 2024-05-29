@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './LoginPage.css';
-import { getUsers, createUser } from '../api.js';
+import { getUsers, createUser, loginUser } from '../api.js';
 
 function LoginPage({ onLogin }) {
   const [users, setUsers] = useState([]);
@@ -21,15 +21,18 @@ function LoginPage({ onLogin }) {
     fetchUsers();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if user exists
-    const user = users.find(user => user.name === username && user.password === password);
-    if (user) {
-      onLogin(username, password);
-    } else {
+    try {
+      const user = await loginUser({ username, password });
+      if (user) {
+        onLogin(username);
+      }
+    } catch (error) {
       setError('Invalid username or password');
+      console.error('Error logging in:', error);
     }
   };
 
@@ -41,7 +44,12 @@ function LoginPage({ onLogin }) {
       setUsers([...users, createdUser]);
       onLogin(username, password); // Automatically log in the new user
     } catch (error) {
-      console.error('Error creating user:', error);
+      if (error.message.includes('Username already exists')) {
+        setError('Username already exists');
+      } else {
+        console.error('Error creating user:', error);
+        setError('Error creating user');
+      }
     }
   };
 

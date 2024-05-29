@@ -25,8 +25,8 @@ function App() {
     setCurrentPage("login");
   };
 
-  const handleLogin = (username, password) => {
-    console.log("Logged in with:", username, password);
+  const handleLogin = (username) => {
+    console.log("Logged in as:", username);
     switchToProfilePage();
   };
 
