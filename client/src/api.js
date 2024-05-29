@@ -16,7 +16,7 @@ export const getUsers = async () => {
 
 export const createUser = async (user) => {
     try {
-        const response = await fetch(`${API_URL}/users`, {
+        const response = await fetch(`${API_URL}/users/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

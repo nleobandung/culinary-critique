@@ -34,7 +34,7 @@ function LoginPage({ onLogin }) {
   };
 
   const handleRegister = async () => {
-    const newUser = { name: username, email: `${username}@example.com`, password };
+    const newUser = { name: username, password: password };
 
     try {
       const createdUser = await createUser(newUser);

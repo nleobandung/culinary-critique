@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
 
         // Create new user
         const newUser = new User({
-            username: req.body.username,
+            username: req.body.name,
             password: req.body.password
         });
         await newUser.save();
@@ -43,6 +43,17 @@ router.post('/login', async (req, res) => {
         res.json({ message: 'Login successful' });
     } catch (error) {
         console.error('Error logging in:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Get all users
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
