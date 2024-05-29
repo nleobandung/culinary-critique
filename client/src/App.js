@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import bplate1 from "./bplate1.jpg";
 import DiningHallsPage from "./Components/HomePage/DiningHallsPage";
+import LoginPage from "./Components/LoginPage";
 
 function App() {
   const [rating, setRating] = useState(0);
@@ -18,6 +19,15 @@ function App() {
 
   const switchToProfilePage = () => {
     setCurrentPage("profile");
+  };
+
+  const switchToLoginPage = () => {
+    setCurrentPage("login");
+  };
+
+  const handleLogin = (username, password) => {
+    console.log("Logged in with:", username, password);
+    switchToProfilePage();
   };
 
   return (
@@ -46,10 +56,14 @@ function App() {
             {/* Add more image items */}
           </div>
           <button onClick={switchToDiningHallsPage}>View Dining Halls</button>
+          <button onClick={switchToLoginPage}>Login</button>
         </header>
       )}
       {currentPage === "diningHalls" && (
         <DiningHallsPage switchToProfilePage={switchToProfilePage} />
+      )}
+      {currentPage === "login" && (
+        <LoginPage switchToProfilePage={switchToProfilePage} onLogin={handleLogin} />
       )}
     </div>
   );
