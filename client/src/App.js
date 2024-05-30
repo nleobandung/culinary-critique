@@ -3,14 +3,27 @@ import "./App.css";
 import bplate1 from "./bplate1.jpg";
 import DiningHallsPage from "./Components/HomePage/DiningHallsPage";
 import LoginPage from "./Components/LoginPage";
+import { rateProfile, createProfile } from './api.js';
 
 function App() {
   const [rating, setRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
   const [currentPage, setCurrentPage] = useState("profile");
+  const [username, setUsername] = useState("");
+  const [profileName, setprofileName] = useState("Bruin Plate");
 
   const handleRatingChange = (value) => {
     setRating(value);
+    sendRatingToBackend(value);
+  };
+
+  const sendRatingToBackend = async (stars) => {
+    try {
+      await rateProfile({ name: profileName, stars, username });
+      // Update the number of ratings in the state if necessary
+    } catch (error) {
+      console.error("Error sending rating to backend:", error);
+    }
   };
 
   const switchToDiningHallsPage = () => {
@@ -27,6 +40,7 @@ function App() {
 
   const handleLogin = (username) => {
     console.log("Logged in as:", username);
+    setUsername(username);
     switchToProfilePage();
   };
 

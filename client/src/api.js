@@ -35,7 +35,6 @@ export const createUser = async (user) => {
     }
 };
 
-// Login a user
 export const loginUser = async (user) => {
     try {
         const response = await fetch(`${API_URL}/users/login`, {
@@ -52,6 +51,46 @@ export const loginUser = async (user) => {
         return data;
     } catch (error) {
         console.error('Error logging in:', error);
+        throw error;
+    }
+};
+
+export const rateProfile = async ({ name, stars, username }) => {
+    try {
+      const response = await fetch(`${API_URL}/profiles/rate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, stars, username }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error rating profile: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error rating profile:', error);
+      throw error;
+    }
+  };
+
+  export const createProfile = async (profile) => {
+    try {
+        const response = await fetch(`${API_URL}/profiles/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(profile),
+        });
+        if (!response.ok) {
+            throw new Error(`Error creating profile: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error creating profile:', error);
         throw error;
     }
 };
