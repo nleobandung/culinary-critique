@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import bplate1 from "./bplate1.jpg";
 import DiningHallsPage from "./Components/HomePage/DiningHallsPage";
 import LoginPage from "./Components/LoginPage";
-import { rateProfile, createProfile } from './api.js';
+import { getProfileRatingCount, rateProfile, createProfile } from './api.js';
 
 function App() {
   const [rating, setRating] = useState(0);
@@ -12,6 +12,19 @@ function App() {
   const [username, setUsername] = useState("");
   const [profileName, setprofileName] = useState("Bruin Plate");
 
+  useEffect(() => {
+    const fetchRatingCount = async () => {
+      try {
+        const count = await getProfileRatingCount(profileName);
+        setNumRatings(count);
+      } catch (error) {
+        console.error('Error fetching rating count:', error);
+      }
+    };
+
+    fetchRatingCount();
+  }, [profileName]);
+
   const handleRatingChange = (value) => {
     setRating(value);
     sendRatingToBackend(value);
@@ -19,8 +32,8 @@ function App() {
 
   const sendRatingToBackend = async (stars) => {
     try {
-      await rateProfile({ name: profileName, stars, username });
-      // Update the number of ratings in the state if necessary
+      const response = await rateProfile({ name: profileName, stars, username });
+      setNumRatings(response.numberOfRatings);
     } catch (error) {
       console.error("Error sending rating to backend:", error);
     }

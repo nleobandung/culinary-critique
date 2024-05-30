@@ -3,6 +3,22 @@ import Profile from '../models/Profile.js'
 
 const router = express.Router();
 
+router.post('/count', async (req, res) => {
+    try {
+        const { name } = req.body;
+        const profile = await Profile.findOne({ name });
+
+        if (!profile) {
+            return res.status(404).json({ message: 'Profile not found'});
+        }
+
+        res.json({ numberOfRatings: profile.numberOfRatings });
+    } catch {
+        console.error('Error fetching number of ratings:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 router.post('/create', async (req, res) => {
     try {
         const { name } = req.body;
@@ -35,10 +51,19 @@ router.post('/rate', async (req, res) => {
             return res.status(404).json({ message: 'Profile not found'});
         }
 
-        profile.ratings.push({ stars, username});
+        const existingRating = profile.ratings.find(rating => rating.username === username);
+
+        if (existingRating) {
+            existingRating.stars = stars;
+        } else {
+            profile.ratings.push({ stars, username});
+        }
 
         await profile.save();
-        res.json({ message: 'Rating added successfully' });
+        res.json({
+            message: 'Rating added successfully',
+            numberOfRatings: profile.numberOfRatings
+        });
 
     } catch (error) {
         console.error('Error adding rating:', error);

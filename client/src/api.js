@@ -55,6 +55,26 @@ export const loginUser = async (user) => {
     }
 };
 
+export const getProfileRatingCount = async (name) => {
+    try {
+      const response = await fetch(`${API_URL}/profiles/count`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error fetching rating count: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data.numberOfRatings;
+    } catch (error) {
+      console.error('Error fetching rating count:', error);
+      throw error;
+    }
+  };
+
 export const rateProfile = async ({ name, stars, username }) => {
     try {
       const response = await fetch(`${API_URL}/profiles/rate`, {
