@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './LoginPage.css';
 
-function LoginPage({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onLogin(username, password);
-  };
-
+function LoginPage() {
   return (
-    <div className="container">
-      <div className="logo">CULINARY CRITIQUE</div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-page">
+      <div className="container">
+        <div className="logo">
+          <h1>Culinary Critique</h1>
+        </div>
+        <form>
+          <div className="form-group">
+            <label>Username:</label>
+            <input type="text" name="username" />
+          </div>
+          <div className="form-group">
+            <label>Password:</label>
+            <input type="password" name="password" />
+          </div>
+          <div className="error">Error creating user</div>
+          <button type="submit">Login</button>
+          <button type="button">Register</button>
+        </form>
+      </div>
     </div>
   );
 }

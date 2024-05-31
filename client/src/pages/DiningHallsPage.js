@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Navbar from '../components/NavBar'
-import Background from "../components/background";
+import Navbar from '../Components/NavBar';  // Ensure correct path and case sensitivity
+import Background from "../Components/background";  // Ensure correct path and case sensitivity
 import { getTop5 } from '../api.js';
 
 function DiningHallsPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [diningHalls, setDiningHalls] = useState([]);
-
   const [topProfiles, setTopProfiles] = useState([]);
   const [worstProfiles, setWorstProfiles] = useState([]);
   const [mostPopularProfiles, setMostPopularProfiles] = useState([]);
@@ -16,7 +14,7 @@ function DiningHallsPage() {
     fetchData();
   }, []);
 
-  const fetchData =  async () => {
+  const fetchData = async () => {
     try {
       const data = await getTop5();
       setTopProfiles(data.top5Profiles);
@@ -30,8 +28,6 @@ function DiningHallsPage() {
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
-
-  console.log(topProfiles);
 
   const renderDiningHall = (diningHall) => (
     <div key={diningHall.name}>
@@ -50,8 +46,8 @@ function DiningHallsPage() {
 
   return (
     <div>
-      <Background/>
-      <Navbar/>
+      <Background />
+      <Navbar />
       <h1>Dining Halls</h1>
       <input
         type="text"
