@@ -14,13 +14,8 @@ function App() {
         <Background />
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <DiningHallsPage/>
-            }
-          />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/" element={<DiningHallsPage/>}/>
+          <Route path="/profile/:name" element={<ProfilePage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>

@@ -1,22 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { getProfileRatingCount, rateProfile } from '../api.js';
 import "./ProfilePage.css";
 import bplate1 from "../bplate1.jpg";
 import { UserDataContext } from "../context/UserDataProvider"
 
-const ProfilePage = ({ username }) => {
+const ProfilePage = () => {
   const [rating, setRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
-  const [profileName] = useState("Bruin Plate");
   const { userData } = useContext(UserDataContext);
+  const profileName = useParams().name;
 
   useEffect(() => {
     const fetchRatingCount = async () => {
-      try {
-        const count = await getProfileRatingCount(profileName);
-        setNumRatings(count);
-      } catch (error) {
-        console.error('Error fetching rating count:', error);
+      if (profileName) {
+        try {
+          const count = await getProfileRatingCount(profileName);
+          setNumRatings(count);
+        } catch (error) {
+          console.error('Error fetching rating count:', error);
+        }
       }
     };
 
@@ -39,7 +42,7 @@ const ProfilePage = ({ username }) => {
 
   return (
     <header className="ProfilePage-header">
-      <h1>Bruin Plate</h1>
+      <h1>{profileName}test</h1>
       <div className="rating">
         {[1, 2, 3, 4, 5].map((value) => (
           <button

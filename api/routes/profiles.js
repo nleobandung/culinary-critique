@@ -3,6 +3,65 @@ import Profile from '../models/Profile.js'
 
 const router = express.Router();
 
+router.get('/profile/:name', async (req, res) => {
+    try {
+      const { name } = req.params;
+
+      const profile = await Profile.findOne({ name }).lean();
+  
+      if (!profile) {
+        return res.status(404).json({ error: 'Profile not found' });
+      }
+  
+      res.json(profile);
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+router.get('/top5', async (req, res) => {
+    try {
+        const profiles = await Profile.find().lean();
+
+        if (!profiles || profiles.length === 0) {
+            return res.status(404).json({ error: 'No profiles found' });
+        }
+
+        profiles.forEach(profile => {
+            profile.averageRating = profile.averageRating;
+            profile.numberOfRatings = profile.numberOfRatings;
+        });
+
+        const sortedByRating = [...profiles].sort((a, b) => b.averageRating - a.averageRating);
+        const sortedByPopularity = [...profiles].sort((a, b) => b.numberOfRatings - a.numberOfRatings);
+
+        const top5Profiles = sortedByRating.slice(0, 5).map(profile => ({
+            name: profile.name,
+            averageRating: profile.averageRating,
+            numberOfRatings: profile.numberOfRatings
+        }));
+
+        const worst5Profiles = sortedByRating.slice(-5).reverse().map(profile => ({
+            name: profile.name,
+            averageRating: profile.averageRating,
+            numberOfRatings: profile.numberOfRatings
+        }));
+
+        const mostPopularProfiles = sortedByPopularity.slice(0, 5).map(profile => ({
+            name: profile.name,
+            averageRating: profile.averageRating,
+            numberOfRatings: profile.numberOfRatings
+        }));
+
+        res.json({ top5Profiles, worst5Profiles, mostPopularProfiles });
+
+    } catch (error) {
+        console.error('Error fetching profiles:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 router.post('/count', async (req, res) => {
     try {
         const { name } = req.body;
@@ -13,7 +72,7 @@ router.post('/count', async (req, res) => {
         }
 
         res.json({ numberOfRatings: profile.numberOfRatings });
-    } catch {
+    } catch (error) {
         console.error('Error fetching number of ratings:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
