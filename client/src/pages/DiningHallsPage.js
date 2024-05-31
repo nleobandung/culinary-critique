@@ -31,6 +31,8 @@ function DiningHallsPage() {
     setSearchQuery(event.target.value);
   };
 
+  console.log(topProfiles);
+
   const renderDiningHall = (diningHall) => (
     <div key={diningHall.name}>
       <p>
@@ -41,8 +43,8 @@ function DiningHallsPage() {
           Name: {diningHall.name}
         </Link>
       </p>
-      <p>Rating: {diningHall.rating}</p>
-      <p>Number of Reviews: {diningHall.numReviews}</p>
+      <p>Rating: {diningHall.averageRating}</p>
+      <p>Number of Reviews: {diningHall.numberOfRatings}</p>
     </div>
   );
 

@@ -22,35 +22,30 @@ router.get('/profile/:name', async (req, res) => {
 
 router.get('/top5', async (req, res) => {
     try {
-        const profiles = await Profile.find().lean();
+        const profiles = await Profile.find();
 
         if (!profiles || profiles.length === 0) {
             return res.status(404).json({ error: 'No profiles found' });
         }
-
-        profiles.forEach(profile => {
-            profile.averageRating = profile.averageRating;
-            profile.numberOfRatings = profile.numberOfRatings;
-        });
 
         const sortedByRating = [...profiles].sort((a, b) => b.averageRating - a.averageRating);
         const sortedByPopularity = [...profiles].sort((a, b) => b.numberOfRatings - a.numberOfRatings);
 
         const top5Profiles = sortedByRating.slice(0, 5).map(profile => ({
             name: profile.name,
-            averageRating: profile.averageRating,
+            averageRating: profile.averageRating.toFixed(2),
             numberOfRatings: profile.numberOfRatings
         }));
 
         const worst5Profiles = sortedByRating.slice(-5).reverse().map(profile => ({
             name: profile.name,
-            averageRating: profile.averageRating,
+            averageRating: profile.averageRating.toFixed(2),
             numberOfRatings: profile.numberOfRatings
         }));
 
         const mostPopularProfiles = sortedByPopularity.slice(0, 5).map(profile => ({
             name: profile.name,
-            averageRating: profile.averageRating,
+            averageRating: profile.averageRating.toFixed(2),
             numberOfRatings: profile.numberOfRatings
         }));
 
