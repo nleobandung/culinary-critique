@@ -76,9 +76,9 @@ export const getTop5 = async () => {
   }
 };
 
-export const getProfileRatingCount = async (name) => {
+export const getProfileInfo = async (name) => {
   try {
-    const response = await fetch(`${API_URL}/profiles/count`, {
+    const response = await fetch(`${API_URL}/profiles/profileInfo`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const getProfileRatingCount = async (name) => {
       throw new Error(`Error fetching rating count: ${response.statusText}`);
     }
     const data = await response.json();
-    return data.numberOfRatings;
+    return data;
   } catch (error) {
     console.error('Error fetching rating count:', error);
     throw error;

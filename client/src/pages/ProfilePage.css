@@ -44,5 +44,9 @@
 }
 
 .number-ratings {
-  font-size: 12px; /* Adjust the font size as needed */
+  font-size: 12px;
+}
+
+.average-rating {
+  font-size: 12px;
 }

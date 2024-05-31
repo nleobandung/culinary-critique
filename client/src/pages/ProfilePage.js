@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getProfileRatingCount, rateProfile } from '../api.js';
+import { getProfileInfo, rateProfile } from '../api.js';
 import "./ProfilePage.css";
 import bplate1 from "../bplate1.jpg";
 import { UserDataContext } from "../context/UserDataProvider"
@@ -8,6 +8,7 @@ import { UserDataContext } from "../context/UserDataProvider"
 const ProfilePage = () => {
   const [rating, setRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
+  const [avgRatings, setAvgRatings] = useState(0);
   const { userData } = useContext(UserDataContext);
   const profileName = useParams().name;
 
@@ -15,8 +16,9 @@ const ProfilePage = () => {
     const fetchRatingCount = async () => {
       if (profileName) {
         try {
-          const count = await getProfileRatingCount(profileName);
-          setNumRatings(count);
+          const { averageRating, numberOfRatings } = await getProfileInfo(profileName);
+          setNumRatings(numberOfRatings);
+          setAvgRatings(averageRating);
         } catch (error) {
           console.error('Error fetching rating count:', error);
         }
@@ -54,6 +56,7 @@ const ProfilePage = () => {
           </button>
         ))}
       </div>
+      <p className="average-rating">Average rating: {avgRatings}</p>
       <p className="number-ratings">{numRatings} ratings</p>
       <div className="image-grid">
         {/* Must find way to load multiple images from backend */}

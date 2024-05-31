@@ -57,7 +57,7 @@ router.get('/top5', async (req, res) => {
     }
 });
 
-router.post('/count', async (req, res) => {
+router.post('/profileInfo', async (req, res) => {
     try {
         const { name } = req.body;
         const profile = await Profile.findOne({ name });
@@ -66,9 +66,9 @@ router.post('/count', async (req, res) => {
             return res.status(404).json({ message: 'Profile not found'});
         }
 
-        res.json({ numberOfRatings: profile.numberOfRatings });
+        res.json({ averageRating: profile.averageRating.toFixed(2), numberOfRatings: profile.numberOfRatings });
     } catch (error) {
-        console.error('Error fetching number of ratings:', error);
+        console.error('Error fetching profile info:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
