@@ -1,5 +1,5 @@
 import './background.css'
-import feast from '../Media/background.jpg'
+import feast from './HomePage/Media/background.jpg'
 
 const Background = () => {
     return (

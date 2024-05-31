@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import './LoginPage.css';
-import { getUsers, createUser, loginUser } from '../api.js';
+import { loginUser, createUser } from '../api.js';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../context/UserDataProvider.js';
 
-function LoginPage({ onLogin }) {
-  const [users, setUsers] = useState([]);
+function LoginPage() {
+  const { setUserDataState } = useContext(UserDataContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const users = await getUsers();
-        setUsers(users);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if user exists
     try {
       const user = await loginUser({ username, password });
       if (user) {
-        onLogin(username);
+        setUserDataState(true, username);
+        navigate('/');
       }
     } catch (error) {
       setError('Invalid username or password');
@@ -40,9 +30,9 @@ function LoginPage({ onLogin }) {
     const newUser = { name: username, password: password };
 
     try {
-      const createdUser = await createUser(newUser);
-      setUsers([...users, createdUser]);
-      onLogin(username, password); // Automatically log in the new user
+      await createUser(newUser);
+      setUserDataState(true, username); // Automatically log in the new user
+      navigate('/');
     } catch (error) {
       if (error.message.includes('Username already exists')) {
         setError('Username already exists');
@@ -69,6 +59,7 @@ function LoginPage({ onLogin }) {
         <button className="login-button" type="submit">Login</button>
         <button className="login-button" type="button" onClick={handleRegister}>Register</button>
       </form>
+      <Link to="/profile">Go to Profile</Link>
     </div>
   );
 }

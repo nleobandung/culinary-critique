@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Navbar from './NavigationBar/NavBar'
-import Background from "./Background/background";
+import { Link } from "react-router-dom";
+import Navbar from '../components/NavBar'
+import Background from "../components/background";
 
-function DiningHallsPage({ switchToProfilePage }) {
+function DiningHallsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [diningHalls, setDiningHalls] = useState([]);
 
@@ -25,17 +26,13 @@ function DiningHallsPage({ switchToProfilePage }) {
 
   const renderDiningHall = (diningHall) => (
     <div key={diningHall.name}>
-            <p>
-        <span
-          style={{ cursor: "pointer", textDecoration: "underline" }}
-          onClick={() => {
-            if (diningHall.name === "Bruin Plate") {
-              switchToProfilePage();
-            }
-          }}
+      <p>
+        <Link
+          to={diningHall.name === "Bruin Plate" ? "/profile" : "#"}
+          style={{ textDecoration: "underline" }}
         >
           Name: {diningHall.name}
-        </span>
+        </Link>
       </p>
       <p>Rating: {diningHall.rating}</p>
       <p>Number of Reviews: {diningHall.numReviews}</p>
