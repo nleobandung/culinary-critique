@@ -116,7 +116,8 @@ router.post('/rate', async (req, res) => {
         await profile.save();
         res.json({
             message: 'Rating added successfully',
-            numberOfRatings: profile.numberOfRatings
+            numberOfRatings: profile.numberOfRatings,
+            averageRating: profile.averageRating
         });
 
     } catch (error) {

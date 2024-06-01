@@ -37,6 +37,7 @@ const ProfilePage = () => {
     try {
       const response = await rateProfile({ name: profileName, stars, username: userData.username });
       setNumRatings(response.numberOfRatings);
+      setAvgRatings(response.averageRating);
     } catch (error) {
       console.error("Error sending rating to backend:", error);
     }
@@ -44,7 +45,7 @@ const ProfilePage = () => {
 
   return (
     <header className="ProfilePage-header">
-      <h1>{profileName}test</h1>
+      <h1>{profileName}</h1>
       <div className="rating">
         {[1, 2, 3, 4, 5].map((value) => (
           <button
