@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Navbar from '../Components/NavBar';  // Ensure correct path and case sensitivity
+import Navbar from '../Components/NavBar';
+import SearchResults from '../Components/SearchResults';
 import { getTop5, getProfileNames } from '../api.js';
 
 function DiningHallsPage() {
@@ -40,6 +41,10 @@ function DiningHallsPage() {
     const input = event.target.value
     setSearchQuery(input);
 
+    if (input.length == 0) {
+      setFilteredProfiles([]);
+    }
+
     if (input.length > 0) {
       const results = profileNames.filter(profile =>
         profile.toLowerCase().includes(event.target.value.toLowerCase())
@@ -63,19 +68,6 @@ function DiningHallsPage() {
     </div>
   );
 
-  const renderProfileName = (name) => (
-    <div key={name}>
-      <p>
-        <Link
-          to={`/profile/${encodeURIComponent(name)}`}
-          style={{ textDecoration: "underline" }}
-        >
-          {name}
-        </Link>
-      </p>
-    </div>
-  );
-
   return (
     <div>     
       <Navbar />
@@ -86,8 +78,7 @@ function DiningHallsPage() {
         value={searchQuery}
         onChange={handleSearch}
       />
-      <h2>Search Results:</h2>
-      {filteredProfiles.map(renderProfileName)}
+      <SearchResults filteredprofiles={filteredProfiles} />
       <h2>Recent Menu Options!</h2>
       <h2>Top 5 Rated Dining Halls</h2>
       {topProfiles.map(renderDiningHall)}
