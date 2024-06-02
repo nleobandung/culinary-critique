@@ -62,6 +62,20 @@ export const loginUser = async (user) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for profiles
 ///////////////////////////////////////////////////////////////////////////
+export const getProfileNames = async () => {
+  try {
+    const response = await fetch(`${API_URL}/profiles/profileNames`);
+    if (!response.ok) {
+      throw new Error(`Error retrieving profile names: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error retrieving profile names:', error);
+    throw error;
+  }
+}
+
 export const getTop5 = async () => {
   try {
     const response = await fetch(`${API_URL}/profiles/top5`);

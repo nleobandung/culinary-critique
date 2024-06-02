@@ -18,7 +18,18 @@ router.get('/profile/:name', async (req, res) => {
       console.error('Error fetching profile:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
-  });
+});
+
+router.get('/profileNames', async (req, res) => {
+    try {
+        const profiles = await Profile.find();
+        const names = profiles.map(profile => profile.name);
+        res.json(names);
+    } catch (error) {
+        console.error('Error fetching profile names:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
 
 router.get('/top5', async (req, res) => {
     try {

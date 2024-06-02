@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from '../Components/NavBar';  // Ensure correct path and case sensitivity
-import { getTop5 } from '../api.js';
+import { getTop5, getProfileNames } from '../api.js';
 
 function DiningHallsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [topProfiles, setTopProfiles] = useState([]);
   const [worstProfiles, setWorstProfiles] = useState([]);
   const [mostPopularProfiles, setMostPopularProfiles] = useState([]);
+  const [profileNames, setProfileNames] = useState([]);
+  const [filteredProfiles, setFilteredProfiles] = useState([]);
 
   useEffect(() => {
     fetchData();
+    fetchProfileNames();
   }, []);
 
   const fetchData = async () => {
@@ -24,8 +27,25 @@ function DiningHallsPage() {
     }
   };
 
+  const fetchProfileNames = async () => {
+    try {
+      const names = await getProfileNames();
+      setProfileNames(names);
+    } catch (error) {
+      console.error('Error fetching profile names:', error);
+    }
+  };
+
   const handleSearch = (event) => {
-    setSearchQuery(event.target.value);
+    const input = event.target.value
+    setSearchQuery(input);
+
+    if (input.length > 0) {
+      const results = profileNames.filter(profile =>
+        profile.toLowerCase().includes(event.target.value.toLowerCase())
+      );
+      setFilteredProfiles(results);
+    }
   };
 
   const renderDiningHall = (diningHall) => (
@@ -43,6 +63,19 @@ function DiningHallsPage() {
     </div>
   );
 
+  const renderProfileName = (name) => (
+    <div key={name}>
+      <p>
+        <Link
+          to={`/profile/${encodeURIComponent(name)}`}
+          style={{ textDecoration: "underline" }}
+        >
+          {name}
+        </Link>
+      </p>
+    </div>
+  );
+
   return (
     <div>     
       <Navbar />
@@ -53,6 +86,8 @@ function DiningHallsPage() {
         value={searchQuery}
         onChange={handleSearch}
       />
+      <h2>Search Results:</h2>
+      {filteredProfiles.map(renderProfileName)}
       <h2>Recent Menu Options!</h2>
       <h2>Top 5 Rated Dining Halls</h2>
       {topProfiles.map(renderDiningHall)}
