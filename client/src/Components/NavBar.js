@@ -16,9 +16,9 @@ const Navbar = () => {
         <li>
           <Link to="/about">About</Link>
         </li>
-        <li className="nav-profile">
-          <Link to="/login">Log In</Link>
-        </li>
+        <div className="nav-profile-wrapper">
+          <Link to="/login" className="nav-profile">Log In</Link>
+        </div>
       </ul>
     </div>
   );

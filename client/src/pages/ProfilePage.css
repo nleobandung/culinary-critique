@@ -1,9 +1,15 @@
+.profile-page-container {
+  padding-top: 100px;
+}
+
 .ProfilePage {
   text-align: center;
 }
 
 .ProfilePage-header {
   background-color: white;
+  align-items: center;
+  text-align: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

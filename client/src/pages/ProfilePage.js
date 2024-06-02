@@ -44,7 +44,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <header className="ProfilePage-header">
+    <div class="profile-page-container">
+`    <header className="ProfilePage-header">
       <h1>{profileName}</h1>
       <div className="rating">
         {[1, 2, 3, 4, 5].map((value) => (
@@ -59,15 +60,8 @@ const ProfilePage = () => {
       </div>
       <p className="average-rating">Average rating: {avgRatings}</p>
       <p className="number-ratings">{numRatings} ratings</p>
-      <div className="image-grid">
-        {/* Must find way to load multiple images from backend */}
-        <div className="image-item">
-          <img src={bplate1} alt="Dog 1" />
-          <p>Bruin Plate</p>
-        </div>
-        {/* Add more image items */}
-      </div>
-    </header>
+    </header>`
+    </div>
   );
 }
 
