@@ -78,7 +78,12 @@ export const getProfileNames = async () => {
 
 export const getTop5 = async () => {
   try {
-    const response = await fetch(`${API_URL}/profiles/top5`);
+    const response = await fetch(`${API_URL}/profiles/top5`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'applcation/json'
+      },
+    });
     if (!response.ok) {
       throw new Error(`Error retrieving average ratings: ${response.statusText}`);
     }
