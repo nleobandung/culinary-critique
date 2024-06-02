@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from '../Components/NavBar';
 import SearchResults from '../Components/SearchResults';
 import { getTop5, getProfileNames } from '../api.js';
+import './DiningHallsPage.css'; // Import the CSS file
 
 function DiningHallsPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -38,10 +39,10 @@ function DiningHallsPage() {
   };
 
   const handleSearch = (event) => {
-    const input = event.target.value
+    const input = event.target.value;
     setSearchQuery(input);
 
-    if (input.length == 0) {
+    if (input.length === 0) {
       setFilteredProfiles([]);
     }
 
@@ -54,7 +55,7 @@ function DiningHallsPage() {
   };
 
   const renderDiningHall = (diningHall) => (
-    <div key={diningHall.name}>
+    <div key={diningHall.name} className="dining-hall">
       <p>
         <Link
           to={`/profile/${encodeURIComponent(diningHall.name)}`}
@@ -69,23 +70,26 @@ function DiningHallsPage() {
   );
 
   return (
-    <div>     
+    <div className="wrapper">
       <Navbar />
-      <h1>Dining Halls</h1>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchQuery}
-        onChange={handleSearch}
-      />
-      <SearchResults filteredprofiles={filteredProfiles} />
-      <h2>Recent Menu Options!</h2>
-      <h2>Top 5 Rated Dining Halls</h2>
-      {topProfiles.map(renderDiningHall)}
-      <h2>Worst 5 Rated Dining Halls</h2>
-      {worstProfiles.map(renderDiningHall)}
-      <h2>Top 5 Most Reviewed Dining Halls</h2>
-      {mostPopularProfiles.map(renderDiningHall)}
+      <div className="container">
+        <h1>Dining Halls</h1>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="search-input"
+        />
+        <SearchResults filteredprofiles={filteredProfiles} />
+        <h2>Recent Menu Options!</h2>
+        <h2>Top 5 Rated Dining Halls</h2>
+        {topProfiles.map(renderDiningHall)}
+        <h2>Worst 5 Rated Dining Halls</h2>
+        {worstProfiles.map(renderDiningHall)}
+        <h2>Top 5 Most Reviewed Dining Halls</h2>
+        {mostPopularProfiles.map(renderDiningHall)}
+      </div>
     </div>
   );
 }

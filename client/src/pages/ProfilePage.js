@@ -59,15 +59,15 @@ const ProfilePage = () => {
   }
 
   return (
-    <div class="profile-page-container">
+    <div className="profile-page-container">
 `    <header className="ProfilePage-header">
       <h1>{profileName}</h1>
-      <div class="rating">
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
-      <span class="star">★</span>
+      <div className="rating">
+      <span className="star">★</span>
+      <span className="star">★</span>
+      <span className="star">★</span>
+      <span className="star">★</span>
+      <span className="star">★</span>
     </div>
       <p className="average-rating">Average rating: {avgRatings}</p>
       <p className="number-ratings">{numRatings} ratings</p>
