@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './LoginPage.css';
 import { loginUser, createUser } from '../api.js';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +10,10 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUserDataState(false, '');
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

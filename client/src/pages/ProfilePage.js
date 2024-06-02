@@ -87,7 +87,7 @@ const ProfilePage = () => {
         </div>
       ) : (
         <div className="login-wrapper">
-          <Link to="/login" className="login">Login to leave a rating</Link>
+          <Link to="/login" className="login">Log in to leave a rating</Link>
         </div>
       )}
     </header>`
