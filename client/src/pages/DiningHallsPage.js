@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from '../Components/NavBar';  // Ensure correct path and case sensitivity
-import Background from "../Components/background";  // Ensure correct path and case sensitivity
 import { getTop5 } from '../api.js';
 
 function DiningHallsPage() {
@@ -45,8 +44,7 @@ function DiningHallsPage() {
   );
 
   return (
-    <div>
-      <Background />
+    <div>     
       <Navbar />
       <h1>Dining Halls</h1>
       <input

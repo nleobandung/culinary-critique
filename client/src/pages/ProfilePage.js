@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getProfileInfo, rateProfile } from '../api.js';
 import "./ProfilePage.css";
 import bplate1 from "../bplate1.jpg";
@@ -28,6 +28,10 @@ const ProfilePage = () => {
     fetchRatingCount();
   }, [profileName]);
 
+  useEffect(() => {
+    setStars(avgRatings);
+  }, [avgRatings]);
+
   const handleRatingChange = (value) => {
     setRating(value);
     sendRatingToBackend(value);
@@ -43,23 +47,49 @@ const ProfilePage = () => {
     }
   };
 
+  function setStars(rating) {
+    const stars = document.querySelectorAll('.star');
+    stars.forEach((star, index) => {
+      if (index < rating) {
+        star.style.color = 'gold';
+      } else {
+        star.style.color = 'gray';
+      }
+    });
+  }
+
   return (
     <div class="profile-page-container">
 `    <header className="ProfilePage-header">
       <h1>{profileName}</h1>
-      <div className="rating">
-        {[1, 2, 3, 4, 5].map((value) => (
-          <button
-            key={value}
-            className={value <= rating ? "active" : ""}
-            onClick={() => handleRatingChange(value)}
-          >
-            ★
-          </button>
-        ))}
-      </div>
+      <div class="rating">
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+      <span class="star">★</span>
+    </div>
       <p className="average-rating">Average rating: {avgRatings}</p>
       <p className="number-ratings">{numRatings} ratings</p>
+      <br></br>
+      <p>Leave a rating!</p>
+      {userData.isLoggedIn ? (
+        <div className="rating">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <button
+              key={value}
+              className={value <= rating ? "active" : ""}
+              onClick={() => handleRatingChange(value)}
+            >
+              ★
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="login-wrapper">
+          <Link to="/login" className="login">Login to leave a rating</Link>
+        </div>
+      )}
     </header>`
     </div>
   );
