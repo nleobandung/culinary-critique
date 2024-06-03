@@ -10,6 +10,11 @@ const CommentsSection = ({ profileName }) =>  {
 
     useEffect(() => {
         fetchComments();
+        const intervalId = setInterval(() => {
+            fetchComments();
+        }, 5000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     const fetchComments = async () => {
@@ -40,9 +45,9 @@ return (
         <h2>Comments</h2>
         <ul className="comment-list">
             {comments.map((comment, index) => (
-                <p key={index} className="comment">
+                <li key={index} className="comment">
                     <div>{comment.username}: {comment.text}</div>
-                </p>
+                </li>
             ))}
         </ul>
         {userData.isLoggedIn ? (
