@@ -23,13 +23,35 @@ router.get('/profile/:name', async (req, res) => {
 router.get('/comments', async (req, res) => {
     try {
         const { profileName } = req.query;
-        const comments = await Profile.findOne({ profileName });
-        return comments.comments;
+        const profile = await Profile.findOne({ name: profileName });
+        return profile.comments;
     } catch (error) {
         console.error('Error fetching comments:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-})
+});
+
+router.post('/addComment', async (req, res) => {
+    try {
+        const { username, text } = req.body;
+        const { profileName } = req.query;
+        const profile = await Profile.findOne({ name: profileName });
+
+        if (!profile) {
+            return res.status(404).json({ message: 'Profile not found'});
+        }
+
+        profile.comments.push({ username, text });
+        await profile.save();
+        res.json({
+            message: 'Comment added successfully',
+        });
+
+    } catch (error) {
+        console.error('Error adding rating:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 router.get('/profileNames', async (req, res) => {
     try {
@@ -40,7 +62,7 @@ router.get('/profileNames', async (req, res) => {
         console.error('Error fetching profile names:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-})
+});
 
 router.get('/top5', async (req, res) => {
     try {
