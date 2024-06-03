@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:' + process.env.REACT_APP_PORT;
+const API_URL = `http://localhost:${process.env.REACT_APP_PORT}`;
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,23 @@ export const loginUser = async (user) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for profiles
 ///////////////////////////////////////////////////////////////////////////
+export const getComments = async (profileName) => {
+  try {
+    const response = await fetch(`${API_URL}/profiles/comments/profileName=${encodeURIComponent(profileName)}`)
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving profile comments: ${response.statusText}`);
+    }
+
+    const comments = await response.json();
+    return comments;
+
+  } catch (error) {
+    console.error('Error retrieving profile comments:', error);
+    throw error;
+  }
+}
+
 export const getProfileNames = async () => {
   try {
     const response = await fetch(`${API_URL}/profiles/profileNames`);

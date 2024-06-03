@@ -20,6 +20,17 @@ router.get('/profile/:name', async (req, res) => {
     }
 });
 
+router.get('/comments', async (req, res) => {
+    try {
+        const { profileName } = req.query;
+        const comments = await Profile.findOne({ profileName });
+        return comments.comments;
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
+
 router.get('/profileNames', async (req, res) => {
     try {
         const profiles = await Profile.find();
