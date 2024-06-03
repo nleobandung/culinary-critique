@@ -24,7 +24,7 @@ router.get('/comments', async (req, res) => {
     try {
         const { profileName } = req.query;
         const profile = await Profile.findOne({ name: profileName });
-        return profile.comments;
+        res.json(profile.comments);
     } catch (error) {
         console.error('Error fetching comments:', error);
         res.status(500).json({ error: 'Internal server error' });

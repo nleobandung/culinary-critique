@@ -64,3 +64,8 @@ margin-bottom: 20px;
 .comments-section .login-wrapper a:hover {
     text-decoration: underline;
 }
+
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+}

@@ -38,10 +38,12 @@ const CommentsSection = ({ profileName }) =>  {
 return (
     <div className="comments-section">
         <h2>Comments</h2>
-        <ul>
-        {comments.map((comment, index) => (
-            <li key={index}>{comment}</li>
-        ))}
+        <ul className="comment-list">
+            {comments.map((comment, index) => (
+                <p key={index} className="comment">
+                    <div>{comment.username}: {comment.text}</div>
+                </p>
+            ))}
         </ul>
         {userData.isLoggedIn ? (
         <div>
