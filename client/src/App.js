@@ -6,20 +6,23 @@ import DiningHallsPage from "./pages/DiningHallsPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import UserDataProvider from "./context/UserDataProvider";
+import UserProfile from "./pages/UserProfile";
+import "./App.css"
 
 function App() {
   return (
-    <UserDataProvider>
-      <Router>
-        <Background />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<DiningHallsPage />} />
-          <Route path="/profile/:name" element={<ProfilePage />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </Router>
-    </UserDataProvider>
+    <UserProfile />
+    // <UserDataProvider>
+    //   <Router>
+    //     <Background />
+    //     <Navbar />
+    //     <Routes>
+    //       <Route path="/" element={<DiningHallsPage />} />
+    //       <Route path="/profile/:name" element={<ProfilePage />} />
+    //       <Route path="/login" element={<LoginPage />} />
+    //     </Routes>
+    //   </Router>
+    // </UserDataProvider>
   );
 }
 
