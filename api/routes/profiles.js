@@ -120,7 +120,6 @@ router.post('/profileInfo', async (req, res) => {
 router.post('/create', async (req, res) => {
     try {
         const { name } = req.body;
-
         const existingProfile = await Profile.findOne({ name });
 
         if (existingProfile) {
@@ -128,7 +127,7 @@ router.post('/create', async (req, res) => {
         }
 
         const newProfile = new Profile({
-            name
+            name: name
         });
 
         await newProfile.save();

@@ -173,21 +173,22 @@ export const rateProfile = async ({ name, stars, username }) => {
   }
 };
 
-export const createProfile = async (profile) => {
+export const createProfile = async (profileName) => {
   try {
     const response = await fetch(`${API_URL}/profiles/create`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify(profile),
+      body: JSON.stringify(profileName.profileName),
     });
+    
     if (!response.ok) {
       throw new Error(`Error creating profile: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.error('Error creating profile:', error);
     throw error;
   }
