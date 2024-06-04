@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getProfileInfo, rateProfile } from '../api.js';
 import "./ProfilePage.css";
 import CommentsSection from '../Components/CommentsSection';
-import { UserDataContext } from "../context/UserDataProvider"
+import { UserDataContext } from "../context/UserDataProvider";
 
 const ProfilePage = () => {
   const [rating, setRating] = useState(0);
