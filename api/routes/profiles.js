@@ -20,6 +20,39 @@ router.get('/profile/:name', async (req, res) => {
     }
 });
 
+router.get('/comments', async (req, res) => {
+    try {
+        const { profileName } = req.query;
+        const profile = await Profile.findOne({ name: profileName });
+        res.json(profile.comments);
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.post('/addComment', async (req, res) => {
+    try {
+        const { username, text } = req.body;
+        const { profileName } = req.query;
+        const profile = await Profile.findOne({ name: profileName });
+
+        if (!profile) {
+            return res.status(404).json({ message: 'Profile not found'});
+        }
+
+        profile.comments.push({ username, text });
+        await profile.save();
+        res.json({
+            message: 'Comment added successfully',
+        });
+
+    } catch (error) {
+        console.error('Error adding rating:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 router.get('/profileNames', async (req, res) => {
     try {
         const profiles = await Profile.find();
@@ -29,7 +62,7 @@ router.get('/profileNames', async (req, res) => {
         console.error('Error fetching profile names:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-})
+});
 
 router.get('/top5', async (req, res) => {
     try {
@@ -87,7 +120,6 @@ router.post('/profileInfo', async (req, res) => {
 router.post('/create', async (req, res) => {
     try {
         const { name } = req.body;
-
         const existingProfile = await Profile.findOne({ name });
 
         if (existingProfile) {
@@ -95,7 +127,7 @@ router.post('/create', async (req, res) => {
         }
 
         const newProfile = new Profile({
-            name
+            name: name
         });
 
         await newProfile.save();
@@ -128,7 +160,7 @@ router.post('/rate', async (req, res) => {
         res.json({
             message: 'Rating added successfully',
             numberOfRatings: profile.numberOfRatings,
-            averageRating: profile.averageRating
+            averageRating: profile.averageRating.toFixed(2)
         });
 
     } catch (error) {

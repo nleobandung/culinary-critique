@@ -44,7 +44,7 @@ function DiningHallsPage() {
     const input = event.target.value;
     setSearchQuery(input);
 
-    if (input.length === 0) {
+    if (input.length == 0) {
       setFilteredProfiles([]);
     }
 
@@ -75,7 +75,7 @@ function DiningHallsPage() {
     <div className="wrapper">
       <Navbar />
       <div className="container">
-        <h1>Dining Halls</h1>
+        <h1 className="dininghalls-h1">Dining Halls</h1>
         <input
           type="text"
           placeholder="Search..."
@@ -84,12 +84,12 @@ function DiningHallsPage() {
           className="search-input"
         />
         <SearchResults filteredprofiles={filteredProfiles} />
-        <h2>Recent Menu Options!</h2>
-        <h2>Top 5 Rated Dining Halls</h2>
+        <h2 className="dininghalls-h2">Recent Menu Options!</h2>
+        <h2 className="dininghalls-h2">Top 5 Rated Dining Halls</h2>
         {topProfiles.map(renderDiningHall)}
-        <h2>Worst 5 Rated Dining Halls</h2>
+        <h2 className="dininghalls-h2">Worst 5 Rated Dining Halls</h2>
         {worstProfiles.map(renderDiningHall)}
-        <h2>Top 5 Most Reviewed Dining Halls</h2>
+        <h2 className="dininghalls-h2">Top 5 Most Reviewed Dining Halls</h2>
         {mostPopularProfiles.map(renderDiningHall)}
       </div>
     </div>
