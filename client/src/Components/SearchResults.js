@@ -8,10 +8,7 @@ const SearchResults = ({ filteredProfiles }) => {
       <div className="search-results-dropdown">
         {filteredProfiles.map(name => (
           <div key={name} className="search-result-item">
-            <Link
-              to={`/profile/${encodeURIComponent(name)}`}
-              style={{ textDecoration: "underline" }}
-            >
+            <Link to={`/profile/${encodeURIComponent(name)}`}>
               {name}
             </Link>
           </div>

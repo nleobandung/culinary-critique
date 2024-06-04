@@ -1,26 +1,19 @@
 .search-results-container {
-    position: relative;
-  }
-  
-  .search-results-dropdown {
-    position: absolute;
-    top: calc(100% + 4px); /* Position the dropdown below the input */
-    left: 0;
-    width: 100%;
-    max-height: 200px; /* Limit maximum height of dropdown */
-    overflow-y: auto; /* Enable vertical scrolling if needed */
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1; /* Ensure the dropdown appears above other content */
-  }
-  
-  .search-result-item {
-    padding: 8px 16px;
-    cursor: pointer;
-  }
-  
-  .search-result-item:hover {
-    background-color: #f0f0f0;
-  }
+  position: absolute;
+  width: 100%; /* Adjust based on the width of the search box */
+  top: 100%;  /* Positions right below the search box */
+  left: 0;
+  z-index: 100; /* Ensures it is on top */
+  background-color: white; /* Non-transparent background */
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Optional shadow for visibility */
+  border-radius: 4px; /* Optional: rounded corners */
+}
+
+.search-result-item {
+  padding: 8px 12px; /* Optional: padding for each item */
+  border-bottom: 1px solid #ddd; /* Optional: divider between items */
+}
+
+.search-result-item:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}

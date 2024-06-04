@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
 import './NavBar.css';
 import { getProfileNames } from '../api.js';
 import SearchResults from './SearchResults';
+import { UserDataContext } from "../context/UserDataProvider";
 
 function NavBar() {
+  const { userData } = useContext(UserDataContext);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [profileNames, setProfileNames] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
@@ -49,14 +52,16 @@ function NavBar() {
           <li><Link to="/explore">Explore</Link></li>
           <li><Link to="/about">About</Link></li>
         </ul>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearch}
-          className="nav-search"
-        />
-        <SearchResults filteredProfiles={filteredProfiles} />
+        <div className="nav-search-container">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="nav-search"
+          />
+          <SearchResults filteredProfiles={filteredProfiles} />
+        </div>
         <Link className="nav-profile" to="/login">
           Log In
         </Link>

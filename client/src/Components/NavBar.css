@@ -6,72 +6,85 @@
     background-color: #2b2929;
     color: #ffffff;
     padding: 10px 20px;
-    z-index: 1000; /* Ensure it stays on top of other content */
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
-}
-
-.nav-logo {
+  }
+  
+  .nav-logo {
     font-family: Outfit;
     font-size: 42px;
     font-weight: 500;
-}
-
-.nav-menu-wrapper {
+  }
+  
+  .nav-menu-wrapper {
     display: flex;
     align-items: center;
-}
-
-.nav-menu {
+    gap: 20px;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+  
+  .nav-menu {
     display: flex;
     align-items: center;
     list-style: none;
     font-size: 18px;
-    gap: 20px; /* Adjust gap to fit your design */
-}
-
-.nav-menu li {
-    display: flex;
-    align-items: center;
-}
-
-.nav-search {
-    background-color: #ffffff; /* Change to white */
-    color: #000000; /* Change text color to black for visibility */
-    border: none;
-    border-radius: 50px;
-    padding: 10px 15px; /* Adjust padding to fit better within the space */
-    margin-left: 10px; /* Add margin to separate from login button */
-}
-
-.nav-menu li a {
+    gap: 20px;
+    margin-right: 20px;
+  }
+  
+  .nav-menu li a {
     color: #ffffff;
     text-decoration: none;
-}
-
-.nav-menu li a:hover {
+  }
+  
+  .nav-menu li a:hover {
     color: #ffa500;
     text-decoration: underline;
-}
-
-.nav-profile-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adjust gap to fit your design */
-}
-
-.nav-profile {
+  }
+  
+  .nav-search-container {
+    position: relative;
+  }
+  
+  .nav-search {
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .nav-profile {
     border-radius: 50px;
-    padding: 10px 20px; /* Adjust padding to fit better within the space */
+    padding: 10px 38px;
     background-color: #615efc;
     color: #ffffff;
     text-decoration: none;
-    margin-left: 10px; /* Add margin to separate from search bar */
-}
-
-.nav-profile:hover {
+    margin-right: 20px;
+  }
+  
+  .nav-profile:hover {
     text-decoration: underline;
     color: #ffa500;
-}
+  }
+  
+  .search-results-container {
+    position: absolute;
+    width: 100%;
+    top: px; /* Adjust as needed to fit below the search box */
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .search-result-item:hover {
+    background-color: #f0f0f0;
+  }
+  
