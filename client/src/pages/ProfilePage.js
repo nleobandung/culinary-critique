@@ -3,29 +3,32 @@ import { useParams, Link } from "react-router-dom";
 import { getProfileInfo, rateProfile } from '../api.js';
 import "./ProfilePage.css";
 import CommentsSection from '../Components/CommentsSection';
-import { UserDataContext } from "../context/UserDataProvider"
+import { UserDataContext } from "../context/UserDataProvider";
 
 const ProfilePage = () => {
   const [rating, setRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
   const [avgRatings, setAvgRatings] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
   const { userData } = useContext(UserDataContext);
-  const profileName = useParams().name;
+  const { name: profileName } = useParams();
 
   useEffect(() => {
-    const fetchRatingCount = async () => {
+    const fetchProfileInfo = async () => {
       if (profileName) {
         try {
-          const { averageRating, numberOfRatings } = await getProfileInfo(profileName);
+          const { averageRating, numberOfRatings, comments } = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
+          setComments(comments || []);
         } catch (error) {
-          console.error('Error fetching rating count:', error);
+          console.error('Error fetching profile info:', error);
         }
       }
     };
 
-    fetchRatingCount();
+    fetchProfileInfo();
   }, [profileName]);
 
   useEffect(() => {
@@ -47,6 +50,19 @@ const ProfilePage = () => {
     }
   };
 
+  const addComment = (text) => {
+    const newComment = {
+      username: userData.username, // Assuming userData contains the username
+      text: text,
+      date: new Date().toLocaleDateString() // Adding date for completeness
+    };
+    setComments([...comments, newComment]);
+  };
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
+
   function setStars(rating) {
     const stars = document.querySelectorAll('.star');
     stars.forEach((star, index) => {
@@ -59,19 +75,19 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="profile-page-container">
+    <div className="profile-page-wrapper">
       <header className="ProfilePage-header">
         <h1>{profileName}</h1>
         <div className="rating">
-        <span className="star">★</span>
-        <span className="star">★</span>
-        <span className="star">★</span>
-        <span className="star">★</span>
-        <span className="star">★</span>
-      </div>
+          <span className="star">★</span>
+          <span className="star">★</span>
+          <span className="star">★</span>
+          <span className="star">★</span>
+          <span className="star">★</span>
+        </div>
         <p className="average-rating">Average rating: {avgRatings}</p>
         <p className="number-ratings">{numRatings} ratings</p>
-        <br></br>
+        <br />
         <p>Leave a rating!</p>
         {userData.isLoggedIn ? (
           <div className="rating">
@@ -90,8 +106,15 @@ const ProfilePage = () => {
             <Link to="/login" className="login">Log in to leave a rating</Link>
           </div>
         )}
-        <CommentsSection profileName={profileName} />
       </header>
+      <div className="comments-dropdown">
+        <button className="toggle-button" onClick={toggleComments}>
+          {showComments ? "Hide Comments" : "Show Comments"}
+        </button>
+        {showComments && (
+          <CommentsSection comments={comments} addComment={addComment} />
+        )}
+      </div>
     </div>
   );
 }
