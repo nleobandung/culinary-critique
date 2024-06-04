@@ -43,21 +43,23 @@ function NavBar() {
       <div className="nav-logo">
         <Link to="/">Culinary Critique</Link>
       </div>
-      <ul className="nav-menu">
-        <li><Link to="/explore">Explore</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/login">Log In</Link></li>
-      </ul>
-      <div className="nav-profile-wrapper">
-        <div className="nav-profile">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={handleSearch}
-          />
-          <SearchResults filteredProfiles={filteredProfiles} />
-        </div>
+      <div className="nav-menu-wrapper">
+        <ul className="nav-menu">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/explore">Explore</Link></li>
+          <li><Link to="/about">About</Link></li>
+        </ul>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="nav-search"
+        />
+        <SearchResults filteredProfiles={filteredProfiles} />
+        <Link className="nav-profile" to="/login">
+          Log In
+        </Link>
       </div>
     </nav>
   );
