@@ -51,7 +51,7 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/create-food">Explore</Link>
+          
         </li>
         <li>
         <div className="about-user-wrapper">
