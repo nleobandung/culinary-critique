@@ -1,12 +1,13 @@
 import ProfileCard from "../Components/ProfileCard"
 import "./UserProfile.css"
-import Navbar from "../Components/NavBar"
+import NavBar from "../Components/NavBar"
+import UserPosts from "../Components/UserPosts"
 
 function UserProfile() {
     return(
         <div className="User">
             <ProfileCard />
-            <div className="Posts">Posts</div>
+            <UserPosts />
         </div>
     )
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProfileInfo, rateProfile } from '../api.js';
 import "./ProfilePage.css";
-import bplate1 from "../bplate1.jpg";
 import { UserDataContext } from "../context/UserDataProvider"
 
 const ProfilePage = () => {

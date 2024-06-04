@@ -6,6 +6,9 @@ import Profile_Background from "../Components/Media/profile_background.jpg"
 const ProfileCard = () => {
     return (
         <div className="ProfileCard">
+            <span>
+                My Profile
+            </span>
             <div className="ProfileImages">
                 <img src={Profile_Background} alt=""/>
                 <img src={Profile_Img} alt=""/>

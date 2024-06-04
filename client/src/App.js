@@ -7,7 +7,6 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import UserDataProvider from "./context/UserDataProvider";
 import UserProfile from "./pages/UserProfile";
-import "./App.css"
 
 function App() {
   return (
