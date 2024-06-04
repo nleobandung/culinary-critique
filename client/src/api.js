@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:' + process.env.REACT_APP_PORT;
+const API_URL = `http://localhost:${process.env.REACT_APP_PORT}`;
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,44 @@ export const loginUser = async (user) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for profiles
 ///////////////////////////////////////////////////////////////////////////
+export const getComments = async (profileName) => {
+  try {
+    const response = await fetch(`${API_URL}/profiles/comments?profileName=${encodeURIComponent(profileName)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving profile comments: ${response.statusText}`);
+    }
+
+    const comments = await response.json();
+    return comments;
+
+  } catch (error) {
+    console.error('Error retrieving profile comments:', error);
+    throw error;
+  }
+}
+
+export const addComment = async ({ profileName, username, text }) => {
+  try {
+    const response = await fetch(`${API_URL}/profiles/addComment?profileName=${encodeURIComponent(profileName)}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ username, text })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error adding comment: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    throw error;
+  }
+}
+
 export const getProfileNames = async () => {
   try {
     const response = await fetch(`${API_URL}/profiles/profileNames`);
@@ -100,9 +138,9 @@ export const getProfileInfo = async (name) => {
     const response = await fetch(`${API_URL}/profiles/profileInfo`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'content-Type': 'application/json',
       },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ name })
     });
     if (!response.ok) {
       throw new Error(`Error fetching rating count: ${response.statusText}`);
