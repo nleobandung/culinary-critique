@@ -38,16 +38,16 @@ function DiningHallsPage() {
   };
 
   const handleSearch = (event) => {
-    const input = event.target.value
+    const input = event.target.value;
     setSearchQuery(input);
 
-    if (input.length == 0) {
+    if (input.length === 0) {
       setFilteredProfiles([]);
     }
 
     if (input.length > 0) {
       const results = profileNames.filter(profile =>
-        profile.toLowerCase().includes(event.target.value.toLowerCase())
+        profile.toLowerCase().includes(input.toLowerCase())
       );
       setFilteredProfiles(results);
     }
@@ -69,7 +69,7 @@ function DiningHallsPage() {
   );
 
   return (
-    <div>     
+    <div>
       <Navbar />
       <h1>Dining Halls</h1>
       <input
@@ -78,7 +78,7 @@ function DiningHallsPage() {
         value={searchQuery}
         onChange={handleSearch}
       />
-      <SearchResults filteredprofiles={filteredProfiles} />
+      <SearchResults filteredProfiles={filteredProfiles} />
       <h2>Recent Menu Options!</h2>
       <h2>Top 5 Rated Dining Halls</h2>
       {topProfiles.map(renderDiningHall)}
