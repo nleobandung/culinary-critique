@@ -15,7 +15,7 @@ function CreateProfilePage () {
 
     const handleCreateProfile = async () => {
         try {
-            await createProfile({ profileName });
+            await createProfile(profileName);
             navigate(`/profile/${profileName}`);
         } catch (error) {
             console.error('Error creating profile:', error);

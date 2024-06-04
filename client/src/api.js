@@ -180,7 +180,7 @@ export const createProfile = async (profileName) => {
       headers: {
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify(profileName.profileName),
+      body: JSON.stringify({ name: profileName }),
     });
     
     if (!response.ok) {
