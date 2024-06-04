@@ -23,6 +23,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/usr" element={<UserProfile />} />
           <Route path="/about" element={<div>inser about page here</div>} />
+          <Route path="/explore" element={<ExplorePage />} />
         </Routes>
       </Router>
     </UserDataProvider>
