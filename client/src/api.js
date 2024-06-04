@@ -1,5 +1,28 @@
 const API_URL = `http://localhost:${process.env.REACT_APP_PORT}`;
 
+///////////////////////////////////////////////////////////////////////////
+//  API calls for AWS S3 Bucket
+///////////////////////////////////////////////////////////////////////////
+export const uploadImage = async (image) => {
+  try {
+    const formData = new FormData();
+    formData.append('image', image);
+    const response = await fetch(`${API_URL}/images/upload`, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      alert('File uploaded successfully');
+    } else {
+      alert('Failed to upload file.');
+    }
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    throw error;
+  }
+};
+
 
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for users
