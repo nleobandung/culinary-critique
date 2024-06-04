@@ -1,73 +1,46 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getComments, addComment } from '../api.js';
-import { Link } from "react-router-dom";
-import { UserDataContext } from "../context/UserDataProvider"
+import React, { useState } from "react";
+import "./CommentsSection.css";
 
-const CommentsSection = ({ profileName }) =>  {
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
-    const { userData } = useContext(UserDataContext);
+const CommentsSection = ({ comments, addComment }) => {
+  const [comment, setComment] = useState("");
 
-    useEffect(() => {
-        fetchComments();
-        const intervalId = setInterval(() => {
-            fetchComments();
-        }, 5000);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (comment.trim()) {
+      addComment(comment);
+      setComment("");
+    }
+  };
 
-        return () => clearInterval(intervalId);
-    }, []);
-
-    const fetchComments = async () => {
-        try {
-            const profileComments = await getComments(profileName);
-            setComments(profileComments);
-        } catch (error) {
-            console.error('Error fetching comments:', error);
-        }
-    };
-
-    const handleCommentChange = (event) => {
-        setNewComment(event.target.value);
-      };
-    
-    const handleAddComment = async () => {
-        try {
-            await addComment({ profileName: profileName, username: userData.username, text: newComment });
-            fetchComments();
-            setNewComment('');
-        } catch (error) {
-            console.error('Error adding comment:', error);
-        }
-    };
-
-return (
+  return (
     <div className="comments-section">
-        <h2>Comments</h2>
-        <ul className="comment-list">
-            {comments.map((comment, index) => (
-                <li key={index} className="comment">
-                    <div>{comment.username}: {comment.text}</div>
-                </li>
-            ))}
-        </ul>
-        {userData.isLoggedIn ? (
-        <div>
-            <textarea
-                rows="4"
-                cols="50"
-                value={newComment}
-                onChange={handleCommentChange}
-                placeholder="Add a comment..."
-            />
-            <button onClick={handleAddComment}>Add Comment</button>
-        </div>
-        ) : (
-            <div className="login-wrapper">
-            <Link to="/login" className="login">Login to add a comment</Link>
+      <h2>Comments</h2>
+      <ul className="comment-list">
+        {comments && comments.map((comment, index) => (
+          <li key={index} className="comment">
+            <div className="comment-header">
+              <span className="comment-author">{comment.username}</span>
+              <span className="comment-date">{new Date().toLocaleDateString()}</span>
             </div>
-        )}
+            <div className="comment-body">
+              {comment.text}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Add a comment..."
+        ></textarea>
+        <button type="submit">Post Comment</button>
+      </form>
+      <div className="login-wrapper">
+        <a href="/login">Log in</a> to post a comment
+      </div>
     </div>
-    );
+  );
 };
 
 export default CommentsSection;
