@@ -41,7 +41,7 @@ function DiningHallsPage() {
     const input = event.target.value
     setSearchQuery(input);
 
-    if (input.length == 0) {
+    if (input.length === 0) {
       setFilteredProfiles([]);
     }
 
