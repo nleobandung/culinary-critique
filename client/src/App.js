@@ -10,18 +10,20 @@ import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
-    <UserProfile />
-    // <UserDataProvider>
-    //   <Router>
-    //     <Background />
-    //     <Navbar />
-    //     <Routes>
-    //       <Route path="/" element={<DiningHallsPage />} />
-    //       <Route path="/profile/:name" element={<ProfilePage />} />
-    //       <Route path="/login" element={<LoginPage />} />
-    //     </Routes>
-    //   </Router>
-    // </UserDataProvider>
+    <UserDataProvider>
+      <Router>
+        <Background />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<DiningHallsPage />} />
+          <Route path="/profile/:name" element={<ProfilePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/usr" element={<UserProfile />} />
+          <Route path="/about" element={<div>inser about page here</div>} />
+          <Route path="/explore" element={<div>inser explore page here</div>} />
+        </Routes>
+      </Router>
+    </UserDataProvider>
   );
 }
 

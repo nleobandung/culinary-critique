@@ -3,13 +3,14 @@
 }
 
 .ProfileCard{
-    border-radius: 1.5rem;
+    margin-top: 5rem;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
     position: relative;
     gap: 0.05rem;
     overflow-x: clip;
-    background: var(--cardColor);
+    background: whitesmoke;
 }
 
 .ProfileImages{

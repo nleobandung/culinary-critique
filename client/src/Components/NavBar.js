@@ -17,7 +17,14 @@ const Navbar = () => {
           <Link to="/dining-halls">Explore</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
+        <div className="about-user-wrapper">
+          {userData.isLoggedIn ? (
+            <Link to="/usr">Profile</Link>
+          ) : (
+            <Link to="/about">About</Link>
+          )}
+        </div>
+
         </li>
         <div className="nav-profile-wrapper">
           {userData.isLoggedIn ? (
