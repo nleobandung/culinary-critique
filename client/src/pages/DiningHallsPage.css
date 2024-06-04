@@ -1,7 +1,7 @@
 /* dininghallspage.css */
 
 /* General styles for the page */
-body {
+  /* body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
@@ -10,9 +10,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
   
   .wrapper {
+    margin-top: 5rem;
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
