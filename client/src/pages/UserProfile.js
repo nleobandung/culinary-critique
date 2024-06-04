@@ -9,7 +9,7 @@ function UserProfile() {
         <div />
         <div className="User">
             <ProfileCard />
-            <UserPosts />
+            
         </div>
 
         <div className="Followers">
