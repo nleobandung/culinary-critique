@@ -21,6 +21,7 @@ function DiningHallsPage() {
   const fetchData = async () => {
     try {
       const data = await getTop5();
+      console.log('Fetched data:', data); // Log the fetched data
       setTopProfiles(data.top5Profiles);
       setWorstProfiles(data.worst5Profiles);
       setMostPopularProfiles(data.mostPopularProfiles);
@@ -32,6 +33,7 @@ function DiningHallsPage() {
   const fetchProfileNames = async () => {
     try {
       const names = await getProfileNames();
+      console.log('Fetched profile names:', names); // Log the fetched profile names
       setProfileNames(names);
     } catch (error) {
       console.error('Error fetching profile names:', error);
@@ -48,7 +50,7 @@ function DiningHallsPage() {
 
     if (input.length > 0) {
       const results = profileNames.filter(profile =>
-        profile.toLowerCase().includes(event.target.value.toLowerCase())
+        profile.toLowerCase().includes(input.toLowerCase())
       );
       setFilteredProfiles(results);
     }
