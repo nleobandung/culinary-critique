@@ -45,7 +45,7 @@ const ExplorePage = () => {
       <Card name="Bruin Cafe" avatar={bruinCafeAvatar} />
       <Card name="Cafe 1919" avatar={cafe1919Avatar} />
       <Card name="The Drey" avatar={dreyAvatar} />
-      <Card name="Epic At Ackerman" avatar={epicAtAckermanAvatar} />
+      <Card name="Epic Ackerman" avatar={epicAtAckermanAvatar} />
       <Card name="Epicuria" avatar={epicuriaAvatar} />
       <Card name="Feast At Rieber" avatar={feastAvatar} />
       <Card name="De Neve" avatar={deNeveAvatar} />
