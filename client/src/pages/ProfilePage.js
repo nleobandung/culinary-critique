@@ -9,7 +9,6 @@ const ProfilePage = () => {
   const [rating, setRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
   const [avgRatings, setAvgRatings] = useState(0);
-  const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
   const { userData } = useContext(UserDataContext);
   const { name: profileName } = useParams();
@@ -18,10 +17,9 @@ const ProfilePage = () => {
     const fetchProfileInfo = async () => {
       if (profileName) {
         try {
-          const { averageRating, numberOfRatings, comments } = await getProfileInfo(profileName);
+          const { averageRating, numberOfRatings} = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
-          setComments(comments || []);
         } catch (error) {
           console.error('Error fetching profile info:', error);
         }
@@ -48,15 +46,6 @@ const ProfilePage = () => {
     } catch (error) {
       console.error("Error sending rating to backend:", error);
     }
-  };
-
-  const addComment = (text) => {
-    const newComment = {
-      username: userData.username, // Assuming userData contains the username
-      text: text,
-      date: new Date().toLocaleDateString() // Adding date for completeness
-    };
-    setComments([...comments, newComment]);
   };
 
   const toggleComments = () => {
@@ -112,7 +101,7 @@ const ProfilePage = () => {
           {showComments ? "Hide Comments" : "Show Comments"}
         </button>
         {showComments && (
-          <CommentsSection comments={comments} addComment={addComment} />
+            <CommentsSection profileName={profileName} />
         )}
       </div>
     </div>
