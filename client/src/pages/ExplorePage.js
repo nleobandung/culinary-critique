@@ -18,7 +18,6 @@ const ExplorePage = () => {
             <img src={avatar} alt={`${name} Avatar`} style={{width: '100%'}} />
             <div className="container">
               <h4><b>{name}</b></h4>
-              <p>Dining Hall</p>
             </div>
           </div>
         );
