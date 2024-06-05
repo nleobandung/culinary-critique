@@ -51,6 +51,9 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
+          <Link to="/create-food">Add Food Location</Link>
+        </li>
+        <li>
           <Link to="/explore">Explore</Link>
         </li>
         <li>
@@ -75,7 +78,7 @@ function NavBar() {
         </div>
         <div className="nav-profile-wrapper">
           {userData.isLoggedIn ? (
-            <Link to="/login" className="nav-profile">Log Out</Link>
+            <Link to="/account-settings" className="nav-profile">Account</Link>
           ) : (
             <Link to="/login" className="nav-profile">Log In</Link>
           )}

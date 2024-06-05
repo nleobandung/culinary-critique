@@ -1,9 +1,83 @@
 const API_URL = `http://localhost:${process.env.REACT_APP_PORT}`;
 
+///////////////////////////////////////////////////////////////////////////
+//  API calls for AWS S3 Bucket
+///////////////////////////////////////////////////////////////////////////
+export const uploadImage = async (image) => {
+  try {
+    const formData = new FormData();
+    formData.append('image', image);
+    const response = await fetch(`${API_URL}/images/upload`, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      const { fileName } = await response.json();
+      return { success: true, message: 'File uploaded successfully', fileName };
+    } else {
+      const errorMessage = await response.text();
+      return { success: false, message: `Failed to upload file: ${errorMessage}`, fileName: null };
+    }
+
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    return { success: false, message: `Error uploading file: ${error.message}`, fileName: null };
+  }
+};
+
 
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for users
 ///////////////////////////////////////////////////////////////////////////
+export const getProfilePhoto = async(username) => {
+  try {
+    const response = await fetch(`${API_URL}/users/get-profile-photo?username=${encodeURIComponent(username)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching profile photo: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    console.error('Error fetching profile photo:', error);
+    throw error;
+  }
+};
+
+export const uploadProfilePhoto = async (username, image) => {
+  try {
+    const { success, message, fileName } = await uploadImage(image);
+
+    if (success) {
+      const response = await fetch(`${API_URL}/users/change-profile-photo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, fileName })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to upload profile photo: ${errorData.message}`);
+        console.error('Upload profile photo failed:', errorData.message);
+      }
+
+    } else {
+      alert(message);
+      console.error('Upload profile photo failed:', message);
+    }
+  } catch (error) {
+    console.error('Upload profile photo failed:', error);
+    throw error;
+  }
+};
+
 export const getUsers = async () => {
   try {
     const response = await fetch(`${API_URL}/users`);

@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import usersRouter from './routes/users.js';
 import profilesRouter from './routes/profiles.js';
+import imagesRouter from './routes/images.js'
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,6 +29,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
         app.use("/users", usersRouter);
 
         app.use("/profiles", profilesRouter);
+
+        app.use("/images", imagesRouter);
 
         app.get("/", (req, res) => {
             res.send("Server is running");
