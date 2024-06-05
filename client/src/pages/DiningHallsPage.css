@@ -1,89 +1,88 @@
 /* dininghallspage.css */
 
 /* General styles for the page */
-  .wrapper {
-    margin-top: 5rem;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    width: 100%;
-    height: 100%;
-    overflow-y: auto; /* Enable vertical scroll */
-  }
-  
-  .container {
-    width: 80%;
-    max-width: 800px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Enable vertical scroll */
-    max-height: 80vh; /* Limit height for better vertical centering */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  .search-input {
-    width: 100%;
-    padding: 10px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    z-index: 1;
-  }
-  
-  h2 {
-    margin-top: 30px;
-    color: #555;
-  }
-  
-  .dining-hall {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    width: 100%;
-  }
-  
-  .dining-hall p {
-    margin: 5px 0;
-  }
-  
-  .dining-hall a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-  
-  .dining-hall a:hover {
-    text-decoration: underline;
-  }
-  
-  .search-results {
-    width: 100%;
-  }
-  
-  .search-results ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .search-results li {
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .search-results li:last-child {
-    border-bottom: none;
-  }
- 
+
+.wrapper {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start; /* Align items to the top */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  padding: 20px; /* Add padding for spacing */
+  box-sizing: border-box;
+  overflow-y: auto; /* Enable vertical scroll */
+  background-color: #f9f9f9; /* Match body background color */
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* Increased max-width for larger screens */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* Enable vertical scrolling within the container */
+  padding-top: 100px; /* Add padding to push content down */
+}
+
+h1 {
+  color: #333;
+  margin-top: 0; /* Remove default margin */
+  position: sticky; /* Make header sticky */
+  top: 20px; /* Adjust position to push it down */
+  background-color: #fff; /* Ensure background matches container */
+  width: 100%; /* Full width */
+  padding: 10px 0; /* Add padding for better spacing */
+  z-index: 10; /* Ensure it stays above other content */
+  text-align: center; /* Center text horizontally */
+}
+
+h2 {
+  margin-top: 30px;
+  color: #555;
+}
+
+.dining-hall {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  width: 100%;
+}
+
+.dining-hall p {
+  margin: 5px 0;
+}
+
+.dining-hall a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.dining-hall a:hover {
+  text-decoration: underline;
+}
+
+.search-results {
+  width: 100%;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Remove default margin */
+}
+
+.search-results li {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
+}
