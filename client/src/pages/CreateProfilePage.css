@@ -1,0 +1,19 @@
+.create-profile-container {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding-top: 200px;
+}
+
+.create-profile {
+    text-align: center;
+}
+
+.login-wrapper {
+    margin-top: 20px;
+}
+
+.create-profile input,
+.create-profile button {
+    margin-top: 10px;
+}

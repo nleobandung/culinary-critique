@@ -6,7 +6,6 @@ const Post = ({data}) => {
     return(
         <div className="Post">
             <img src={data.img} alt=""/>
-
             <div className="postReact">
                 <img src={data.liked?liked: notliked} alt="" />
             </div>

@@ -1,8 +1,25 @@
+:root{
+    --gray: #444444;
+}
+
+.Page{
+    margin-top: -5rem;
+}
+
+.Profile{
+    position: relative;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+}
+
 .User{
     position: relative;
     display: grid;
     margin: auto;
-    width: 50%;
-    border: 3px solid var(--gray);
-    padding: 10px;
+    width: auto;
+}
+
+.Followers{
+    margin-top: 10rem;
+    padding: 0rem;
 }
