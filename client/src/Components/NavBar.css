@@ -23,7 +23,8 @@
     align-items: center;
     list-style: none;
     font-size: 18px;
-    gap: 90px;
+    gap: 30px; /* Adjusted the gap to ensure uniform spacing */
+    margin-left: auto; /* This pushes the nav items to the right */
 }
 
 .nav-menu li a {
@@ -51,4 +52,20 @@
 .nav-profile:hover {
     text-decoration: underline;
     color: #ffa500;
+}
+
+.nav-search-container {
+    position: relative;
+}
+
+.nav-search {
+    padding: 5px;
+}
+
+.nav-search-results {
+    position: absolute;
+    top: 30px;
+    background: white;
+    color: black;
+    z-index: 999;
 }
