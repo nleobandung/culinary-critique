@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { uploadImage } from '../api';
+import { useState, useContext } from "react";
+import { uploadProfilePhoto } from '../api';
+import { UserDataContext } from "../context/UserDataProvider";
 
 function AccountSettingsPage() {
   const [file, setFile] = useState(null);
+  const { userData } = useContext(UserDataContext);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -11,8 +13,7 @@ function AccountSettingsPage() {
 
   const handleUploadClick = () => {
     if (file) {
-      console.log(file.name);
-      uploadImage(file);
+      uploadProfilePhoto(userData.username, file);
     } else {
       alert('Please select a file first.');
     }

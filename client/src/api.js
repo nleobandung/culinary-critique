@@ -30,17 +30,33 @@ export const uploadImage = async (image) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for users
 ///////////////////////////////////////////////////////////////////////////
-export const uploadProfilePhoto = async ({ username, image }) => {
+export const getProfilePhoto = async(username) => {
   try {
-    const { fileName, success, message } = await uploadImage(image);
+    const response = await fetch(`${API_URL}/users/get-profile-photo?username=${encodeURIComponent(username)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching profile photo: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    console.error('Error fetching profile photo:', error);
+    throw error;
+  }
+};
+
+export const uploadProfilePhoto = async (username, image) => {
+  try {
+    const { success, message, fileName } = await uploadImage(image);
 
     if (success) {
-      const response = await fetch(`${API_URL}/users/profile-photo`, {
+      const response = await fetch(`${API_URL}/users/change-profile-photo`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(username, fileName),
+        body: JSON.stringify({ username, fileName })
       });
 
       if (response.ok) {

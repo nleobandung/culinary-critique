@@ -36,7 +36,10 @@ router.post('/upload', upload.single('image'), async (req, res) => {
                 return res.status(500).send('Error uploading file');
             }
 
-            res.status(200).send('File uploaded successfully', file.originalname);
+            res.status(200).send({
+                message: 'File uploaded successfully', 
+                fileName: file.originalname
+            });
         });
 
     } catch (error) {

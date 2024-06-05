@@ -7,10 +7,26 @@ dotenv.config();
 
 const router = express.Router();
 
-// Change profile photo
-router.post('/profile-photo', async (req, res) => {
+// Get profile photo
+router.get('/get-profile-photo', async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username });
+        const user = await User.findOne({ username: req.query.username });
+        if (!user) {
+            return res.status(400).json({ message: 'Username not found' });
+        }
+
+        res.json(user.profilePhoto);
+    } catch (error) {
+        console.error('Error fetching profile photo:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Change profile photo
+router.post('/change-profile-photo', async (req, res) => {
+    try {
+        const { username, fileName } = req.body;
+        const user = await User.findOne({ username: username });
         if (!user) {
             return res.status(400).json({ message: 'Username not found' });
         }
