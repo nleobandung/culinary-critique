@@ -7,6 +7,11 @@ import dreyAvatar from '../Components/Media/foods/drey.jpg';
 import epicAtAckermanAvatar from '../Components/Media/foods/epic_at_ackerman.jpg';
 import epicuriaAvatar from '../Components/Media/foods/epic.jpg';
 import feastAvatar from '../Components/Media/foods/feast.jpg';
+import deNeveAvatar from '../Components/Media/foods/neve.jpg';
+import bPlateAvatar from '../Components/Media/foods/plate.jpg';
+import rendeAvatar from '../Components/Media/foods/rende.jpg';
+import spiceKitchenAvatar from '../Components/Media/foods/spice_kitchen.jpg';
+import studyAvatar from '../Components/Media/foods/the_study.jpg';
 import './ExplorePage.css';
 
 
@@ -43,6 +48,11 @@ const ExplorePage = () => {
       <Card name="Epic At Ackerman" avatar={epicAtAckermanAvatar} />
       <Card name="Epicuria" avatar={epicuriaAvatar} />
       <Card name="Feast At Rieber" avatar={feastAvatar} />
+      <Card name="De Neve" avatar={deNeveAvatar} />
+      <Card name="Bruin Plate" avatar={bPlateAvatar} />
+      <Card name="Rendevous" avatar={rendeAvatar} />
+      <Card name="Spice Kitchen" avatar={spiceKitchenAvatar} />
+      <Card name="The Study" avatar={studyAvatar} />
     </div>
   );
 };
