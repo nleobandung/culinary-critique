@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProfileInfo, rateProfile } from '../api.js';
+import { getProfileInfo, rateProfile, getComments, addComment } from '../api.js';
 import "./ProfilePage.css";
 import CommentsSection from '../Components/CommentsSection';
 import { UserDataContext } from "../context/UserDataProvider";
@@ -18,10 +18,11 @@ const ProfilePage = () => {
     const fetchProfileInfo = async () => {
       if (profileName) {
         try {
-          const { averageRating, numberOfRatings, comments } = await getProfileInfo(profileName);
+          const { averageRating, numberOfRatings} = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
-          setComments(comments || []);
+          const fetchedComments = await getComments(profileName);
+          setComments(fetchedComments);
         } catch (error) {
           console.error('Error fetching profile info:', error);
         }
@@ -51,12 +52,7 @@ const ProfilePage = () => {
   };
 
   const addComment = (text) => {
-    const newComment = {
-      username: userData.username, // Assuming userData contains the username
-      text: text,
-      date: new Date().toLocaleDateString() // Adding date for completeness
-    };
-    setComments([...comments, newComment]);
+    addComment(profileName, userData.username, text);
   };
 
   const toggleComments = () => {
