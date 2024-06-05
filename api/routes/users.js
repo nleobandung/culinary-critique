@@ -1,8 +1,28 @@
 import express from 'express';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
+
+// Change profile photo
+router.post('/profile-photo', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.body.username });
+        if (!user) {
+            return res.status(400).json({ message: 'Username not found' });
+        }
+        user.profilePhoto = `https://${process.env.S3_BUCKET}.s3.${process.env.REGION}.amazonaws.com/${fileName}`;
+
+        await user.save();
+        res.status(200).json({ message: 'Profile photo successfully changed' });
+    } catch (error) {
+        console.error('Error changing profile photo:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // Register a new user
 router.post('/register', async (req, res) => {

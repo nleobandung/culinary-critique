@@ -13,13 +13,16 @@ export const uploadImage = async (image) => {
     });
 
     if (response.ok) {
-      alert('File uploaded successfully');
+      const { fileName } = await response.json();
+      return { success: true, message: 'File uploaded successfully', fileName };
     } else {
-      alert('Failed to upload file.');
+      const errorMessage = await response.text();
+      return { success: false, message: `Failed to upload file: ${errorMessage}`, fileName: null };
     }
+
   } catch (error) {
     console.error('Error uploading file:', error);
-    throw error;
+    return { success: false, message: `Error uploading file: ${error.message}`, fileName: null };
   }
 };
 
@@ -27,6 +30,38 @@ export const uploadImage = async (image) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for users
 ///////////////////////////////////////////////////////////////////////////
+export const uploadProfilePhoto = async ({ username, image }) => {
+  try {
+    const { fileName, success, message } = await uploadImage(image);
+
+    if (success) {
+      const response = await fetch(`${API_URL}/users/profile-photo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(username, fileName),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to upload profile photo: ${errorData.message}`);
+        console.error('Upload profile photo failed:', errorData.message);
+      }
+
+    } else {
+      alert(message);
+      console.error('Upload profile photo failed:', message);
+    }
+  } catch (error) {
+    console.error('Upload profile photo failed:', error);
+    throw error;
+  }
+};
+
 export const getUsers = async () => {
   try {
     const response = await fetch(`${API_URL}/users`);

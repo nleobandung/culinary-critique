@@ -8,9 +8,6 @@ dotenv.config();
 const router = express.Router();
 const upload = multer();
 
-const S3_BUCKET = "culinary-critique";
-const REGION = "us-west-1";
-
 // AWS credentials
 AWS.config.update({
     accessKeyId: process.env.S3_ACCESS_KEY,
@@ -28,7 +25,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         }
 
         const params = {
-            Bucket: S3_BUCKET,
+            Bucket: process.env.S3_BUCKET,
             Key: file.originalname,
             Body: file.buffer,
         };
@@ -38,7 +35,8 @@ router.post('/upload', upload.single('image'), async (req, res) => {
                 console.error('Error uploading file:', err);
                 return res.status(500).send('Error uploading file');
             }
-            res.status(200).send('File uploaded successfully');
+
+            res.status(200).send('File uploaded successfully', file.originalname);
         });
 
     } catch (error) {
