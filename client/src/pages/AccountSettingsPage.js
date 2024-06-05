@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { Link } from 'react-router-dom';
 import { uploadProfilePhoto } from '../api';
 import { UserDataContext } from "../context/UserDataProvider";
 
@@ -22,8 +23,10 @@ function AccountSettingsPage() {
   return (
     <div className="App">
       <div>
+        <p>Change your profile photo</p>
         <input type="file" onChange={handleFileChange} />
         <button onClick={handleUploadClick}>Upload</button>
+        <Link to="/login">Log Out</Link>
       </div>
     </div>
   );

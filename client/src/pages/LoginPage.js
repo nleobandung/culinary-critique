@@ -21,7 +21,7 @@ function LoginPage() {
       const user = await loginUser({ username, password });
       if (user) {
         setUserDataState(true, username);
-        navigate('/');
+        navigate(-1);
       }
     } catch (error) {
       setError('Invalid username or password');
@@ -62,7 +62,7 @@ function LoginPage() {
         <button className="login-button" type="submit">Login</button>
         <button className="login-button" type="button" onClick={handleRegister}>Register</button>
       </form>
-      <Link to="/profile">Go to Profile</Link>
+      <Link to="/">Go to Home Page</Link>
     </div>
   );
 }
