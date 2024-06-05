@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import bruinBowlAvatar from '../Components/Media/foods/bruin_bowl.jpg';
 import bruinCafeAvatar from '../Components/Media/foods/bruin_cafe.jpg';
 import cafe1919Avatar from '../Components/Media/foods/cafe_1919.jpg';
@@ -11,17 +12,27 @@ import './ExplorePage.css';
 
 // ExplorePage component
 const ExplorePage = () => {
-
-    const Card = ({ name, avatar }) => {
+    
+      const Card = ({ name, avatar }) => {
         return (
           <div className="card">
+            
             <img src={avatar} alt={`${name} Avatar`} style={{width: '100%'}} />
             <div className="container">
-              <h4><b>{name}</b></h4>
+                
+              <h4>
+        <Link
+          to={`/profile/${encodeURIComponent(name)}`}
+          className="link-text"
+        >
+          {name}
+        </Link>
+      </h4>
             </div>
           </div>
         );
       };
+ 
 
   return (
     <div className="explore-page">
