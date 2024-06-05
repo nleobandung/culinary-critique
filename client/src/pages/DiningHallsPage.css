@@ -1,17 +1,6 @@
 /* dininghallspage.css */
 
 /* General styles for the page */
-  /* body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-  
   .wrapper {
     margin-top: 5rem;
     display: flex;

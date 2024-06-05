@@ -15,20 +15,22 @@ const CommentsSection = ({ comments, addComment }) => {
   return (
     <div className="comments-section">
       <h2>Comments</h2>
-      <ul className="comment-list">
-        {comments && comments.map((comment, index) => (
-          <li key={index} className="comment">
-            <div className="comment-header">
-              <span className="comment-author">{comment.username}</span>
-              <span className="comment-date">{new Date().toLocaleDateString()}</span>
-            </div>
-            <div className="comment-body">
-              {comment.text}
-            </div>
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
+      <div className="comments-list">
+        <ul>
+          {comments && comments.map((comment, index) => (
+            <li key={index} className="comment">
+              <div className="comment-header">
+                <span className="comment-author">{comment.username}</span>
+                <span className="comment-date">{new Date(comment.date).toLocaleDateString()}</span>
+              </div>
+              <div className="comment-body">
+                {comment.text}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <form onSubmit={handleSubmit} className="comment-form">
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -36,9 +38,11 @@ const CommentsSection = ({ comments, addComment }) => {
         ></textarea>
         <button type="submit">Post Comment</button>
       </form>
-      <div className="login-wrapper">
-        <a href="/login">Log in</a> to post a comment
-      </div>
+      {!comments.length && (
+        <div className="login-wrapper">
+          <a href="/login">Log in</a> to post a comment
+        </div>
+      )}
     </div>
   );
 };

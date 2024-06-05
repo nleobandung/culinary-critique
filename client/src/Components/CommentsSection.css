@@ -1,66 +1,19 @@
-/* comments.css */
-
-/* General styles for the comments section */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    overflow: auto;
-}
-
-.profile-page-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    margin: 20px auto;
-}
-
-.ProfilePage-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.rating .star {
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.rating button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: gray;
-    transition: color 0.3s;
-}
-
-.rating button.active {
-    color: gold;
-}
-
 .comments-section {
     width: 100%;
-    max-height: 400px; /* Limit height */
-    overflow-y: scroll; /* Scrollable */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #e0e0e0;
     padding: 20px;
     border-radius: 12px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
-}
-
-.comments-section h2 {
+    overflow-y: auto; /* Added to enable scrolling */
+  }
+  
+  .comments-section h2 {
+    width: 100%;
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 1.8rem;
@@ -68,39 +21,45 @@ body {
     text-align: center;
     border-bottom: 2px solid #007bff;
     padding-bottom: 10px;
-}
-
-.comments-section ul {
+  }
+  
+  .comments-section ul {
     list-style-type: none;
     padding: 0;
-    margin: 0 0 20px;
-}
-
-.comments-section ul li {
+    margin: 0;
+  }
+  
+  .comments-section ul li {
     padding: 15px;
-    margin-bottom: 15px;
+    margin: 10px 0;
     border: 1px solid #e0e0e0;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.comments-section ul li:last-child {
-    border-bottom: none;
-}
-
-.comments-section textarea {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .comments-section textarea {
     width: 100%;
     padding: 15px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    resize: vertical; /* Allows vertical resizing */
+    resize: vertical;
     margin-bottom: 15px;
     font-size: 1rem;
     background-color: #f9f9f9;
-}
-
-.comments-section button {
+  }
+  
+  .comments-section form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    position: sticky; /* Make form sticky */
+    bottom: 0;
+    background-color: #ffffff; /* Ensure background matches the page */
+    z-index: 1; /* Ensure it stays above other content */
+  }
+  
+  .comments-section button {
     padding: 12px 20px;
     background-color: #007bff;
     color: white;
@@ -109,85 +68,25 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 1rem;
-    display: block;
-    margin: 0 auto;
-}
-
-.comments-section button:hover {
+    align-self: flex-end;
+  }
+  
+  .comments-section button:hover {
     background-color: #0056b3;
-}
-
-.comments-section .login-wrapper {
+  }
+  
+  .comments-section .login-wrapper {
     text-align: center;
     margin-top: 10px;
-}
-
-.comments-section .login-wrapper a {
+  }
+  
+  .comments-section .login-wrapper a {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
-}
-
-.comments-section .login-wrapper a:hover {
+  }
+  
+  .comments-section .login-wrapper a:hover {
     text-decoration: underline;
-}
-
-.comment-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.comment {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    margin-bottom: 15px;
-    padding: 15px;
-    font-size: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    position: relative;
-}
-
-.comment .comment-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.comment .comment-author {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #007bff;
-}
-
-.comment .comment-date {
-    font-size: 0.8rem;
-    color: #888888;
-}
-
-.comment .comment-body {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #333333;
-}
-
-.comments-dropdown {
-    text-align: center;
-}
-
-.toggle-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-.toggle-button:hover {
-    background-color: #0056b3;
-}
+  }
+  
