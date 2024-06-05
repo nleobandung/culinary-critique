@@ -2,6 +2,10 @@
     --gray: #444444;
 }
 
+.Page{
+    margin-top: -5rem;
+}
+
 .Profile{
     position: relative;
     display: grid;
@@ -13,11 +17,9 @@
     display: grid;
     margin: auto;
     width: auto;
-    border: 3px solid var(--gray);
-    padding: 0%;
 }
 
 .Followers{
     margin-top: 10rem;
-    padding: 3rem;
+    padding: 0rem;
 }
