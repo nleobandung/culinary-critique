@@ -83,7 +83,7 @@ function DiningHallsPage() {
           onChange={handleSearch}
           className="search-input"
         />
-        <SearchResults filteredprofiles={filteredProfiles} />
+        <SearchResults filteredProfiles={filteredProfiles} />
         <h2 className="dininghalls-h2">Recent Menu Options!</h2>
         <h2 className="dininghalls-h2">Top 5 Rated Dining Halls</h2>
         {topProfiles.map(renderDiningHall)}

@@ -63,6 +63,16 @@ function NavBar() {
         </div>
 
         </li>
+        <div className="nav-search-container">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="nav-search"
+          />
+          <SearchResults filteredProfiles={filteredProfiles} />
+        </div>
         <div className="nav-profile-wrapper">
           {userData.isLoggedIn ? (
             <Link to="/login" className="nav-profile">Log Out</Link>
@@ -70,7 +80,7 @@ function NavBar() {
             <Link to="/login" className="nav-profile">Log In</Link>
           )}
         </div>
-        </ul>
+      </ul>
     </nav>
   );
 }
