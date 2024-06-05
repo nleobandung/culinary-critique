@@ -1,7 +1,6 @@
 /* dininghallspage.css */
 
 /* General styles for the page */
-
 .wrapper {
   display: flex;
   margin-top: 5rem;
@@ -70,7 +69,14 @@ h2 {
 }
 
 .search-results {
+  position: absolute;
   width: 100%;
+  max-width: 300px; /* Adjust based on your needs */
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  margin-top: 5px;
 }
 
 .search-results ul {
@@ -84,6 +90,23 @@ h2 {
   border-bottom: 1px solid #ddd;
 }
 
+.search-results li a {
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+.search-results li a:hover {
+  text-decoration: underline;
+}
+
 .search-results li:last-child {
   border-bottom: none;
+}
+
+.search-input {
+  position: relative;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }

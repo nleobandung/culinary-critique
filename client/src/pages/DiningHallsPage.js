@@ -76,14 +76,20 @@ function DiningHallsPage() {
       <Navbar />
       <div className="container">
         <h1 className="dininghalls-h1">Dining Halls</h1>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearch}
-          className="search-input"
-        />
-        <SearchResults filteredProfiles={filteredProfiles} />
+        <div className="search-wrapper">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="search-input"
+          />
+          {filteredProfiles.length > 0 && (
+            <div className="search-results">
+              <SearchResults filteredProfiles={filteredProfiles} />
+            </div>
+          )}
+        </div>
         <h2 className="dininghalls-h2">Recent Menu Options!</h2>
         <h2 className="dininghalls-h2">Top 5 Rated Dining Halls</h2>
         {topProfiles.map(renderDiningHall)}
