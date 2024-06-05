@@ -153,8 +153,9 @@ export const getComments = async (profileName) => {
   }
 }
 
-export const addComment = async ({ profileName, username, text }) => {
+export const addComment = async (profileName, username, text) => {
   try {
+    console.log(profileName);
     const response = await fetch(`${API_URL}/profiles/addComment?profileName=${encodeURIComponent(profileName)}`, {
       method: 'POST',
       headers: {

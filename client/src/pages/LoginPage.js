@@ -35,7 +35,7 @@ function LoginPage() {
     try {
       await createUser(newUser);
       setUserDataState(true, username); // Automatically log in the new user
-      navigate('/');
+      navigate(-1);
     } catch (error) {
       if (error.message.includes('Username already exists')) {
         setError('Username already exists');

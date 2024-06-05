@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProfileInfo, rateProfile, getComments, addComment } from '../api.js';
+import { getProfileInfo, rateProfile } from '../api.js';
 import "./ProfilePage.css";
 import CommentsSection from '../Components/CommentsSection';
 import { UserDataContext } from "../context/UserDataProvider";
@@ -9,7 +9,6 @@ const ProfilePage = () => {
   const [rating, setRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
   const [avgRatings, setAvgRatings] = useState(0);
-  const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
   const { userData } = useContext(UserDataContext);
   const { name: profileName } = useParams();
@@ -21,8 +20,6 @@ const ProfilePage = () => {
           const { averageRating, numberOfRatings} = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
-          const fetchedComments = await getComments(profileName);
-          setComments(fetchedComments);
         } catch (error) {
           console.error('Error fetching profile info:', error);
         }
@@ -49,10 +46,6 @@ const ProfilePage = () => {
     } catch (error) {
       console.error("Error sending rating to backend:", error);
     }
-  };
-
-  const addComment = (text) => {
-    addComment(profileName, userData.username, text);
   };
 
   const toggleComments = () => {
@@ -108,7 +101,7 @@ const ProfilePage = () => {
           {showComments ? "Hide Comments" : "Show Comments"}
         </button>
         {showComments && (
-          <CommentsSection comments={comments} addComment={addComment} />
+            <CommentsSection profileName={profileName} />
         )}
       </div>
     </div>
