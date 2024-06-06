@@ -10,6 +10,7 @@ import AccountSettingsPage from "./pages/AccountSettingsPage"
 import UserDataProvider from "./context/UserDataProvider";
 import UserProfile from "./pages/UserProfile";
 import ExplorePage from "./pages/ExplorePage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/usr" element={<UserProfile />} />
           <Route path="/about" element={<div>inser about page here</div>} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/about1" element={<AboutPage />} />
         </Routes>
       </Router>
     </UserDataProvider>
