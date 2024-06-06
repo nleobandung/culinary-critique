@@ -10,7 +10,6 @@ import { getComments } from "../api.js";
 
 function UserProfile() {
     const [displayNames, setDisplayNames] = useState([])
-    const [test, setTest] = useState(["helo", "bruh"])
 
     useEffect(() => {
         getData();
@@ -38,10 +37,6 @@ function UserProfile() {
                 <FollowersWidget />
             </div>  
         </div>
-        {/* <h3>{displayNames.map((name) => (
-            <li>{name}</li>
-        ))}</h3>
-        <h1>{displayNames}</h1> */}
         <div className="Posts">
             <UserPosts />
         </div>
