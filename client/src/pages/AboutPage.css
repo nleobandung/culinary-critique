@@ -2,18 +2,19 @@
     margin: 20px;
     margin-top: 8rem;
     padding: 20px;
-    background-color: rgb(125, 125, 125);
+    background-color: whitesmoke;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
   .about-container h1 {
-    color: #5d1069;
+    color: rgb(96, 0, 133);
     font-size: 24px;
+    font-weight: 700;
   }
   
   .about-container p {
-    color: #ffffff;
+    color: black;
     font-size: 16px;
     line-height: 1.6;
   }
