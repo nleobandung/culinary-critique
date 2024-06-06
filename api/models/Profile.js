@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const ratingSchema = new mongoose.Schema({
     stars: { type: Number, required: true, min: 1, max: 5},
@@ -13,6 +16,7 @@ const commentSchema = new mongoose.Schema({
 
 const profileSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true},
+    imageLink: { type: String, default: `https://${process.env.S3_BUCKET}.s3.${process.env.REGION}.amazonaws.com/dog.jpg`},
     ratings: { type: [ratingSchema], default: [] },
     comments: { type: [commentSchema], default: [] }
 });

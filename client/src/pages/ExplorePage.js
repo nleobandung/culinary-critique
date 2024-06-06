@@ -59,8 +59,9 @@
 
 // export default ExplorePage;
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { getProfileNamesAndImages } from '../api.js';
 // Importing images for dining halls
 import bruinBowlAvatar from '../Components/Media/foods/bruin_bowl.jpg';
 import bruinCafeAvatar from '../Components/Media/foods/bruin_cafe.jpg';
@@ -78,6 +79,20 @@ import './ExplorePage.css'; // Importing CSS for styling
 
 // ExplorePage component
 const ExplorePage = () => {
+  const [profiles, setProfiles] = useState([]);
+
+  const fetchProfiles = async () => {
+    try {
+      const data = await getProfileNamesAndImages();
+      setProfiles(data);
+    } catch (error) {
+      console.error("Error fetching profiles:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfiles();
+  }, []);
     
   // Card component to display individual dining hall information
   const Card = ({ name, avatar }) => {
@@ -103,18 +118,9 @@ const ExplorePage = () => {
   return (
     <div className="explore-page">
       {/* Rendering Card components for each dining hall */}
-      <Card name="Bruin Bowl" avatar={bruinBowlAvatar} />
-      <Card name="Bruin Cafe" avatar={bruinCafeAvatar} />
-      <Card name="Cafe 1919" avatar={cafe1919Avatar} />
-      <Card name="The Drey" avatar={dreyAvatar} />
-      <Card name="Epic Ackerman" avatar={epicAtAckermanAvatar} />
-      <Card name="Epicuria" avatar={epicuriaAvatar} />
-      <Card name="Feast At Rieber" avatar={feastAvatar} />
-      <Card name="De Neve" avatar={deNeveAvatar} />
-      <Card name="Bruin Plate" avatar={bPlateAvatar} />
-      <Card name="Rendevous" avatar={rendeAvatar} />
-      <Card name="Spice Kitchen" avatar={spiceKitchenAvatar} />
-      <Card name="The Study" avatar={studyAvatar} />
+      {profiles.map(profile => (
+        <Card key={profile.name} name={profile.name} avatar={profile.imageLink} />
+      ))}
     </div>
   );
 };
