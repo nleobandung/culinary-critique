@@ -60,8 +60,9 @@ const ProfilePage = () => {
 
   function setStars(rating) {
     const stars = document.querySelectorAll('.star');
+    const roundedRating = Math.round(rating);
     stars.forEach((star, index) => {
-      if (index < rating) {
+      if (index < roundedRating) {
         star.style.color = 'gold';
       } else {
         star.style.color = 'gray';
