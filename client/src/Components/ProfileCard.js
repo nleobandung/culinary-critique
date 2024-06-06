@@ -6,9 +6,6 @@ import Profile_Background from "../Components/Media/profile_background.jpg"
 const ProfileCard = () => {
     return (
         <div className="ProfileCard">
-            <span className="MyProfile">
-                My Profile
-            </span>
             <div className="ProfileImages">
                 <img src={Profile_Background} alt=""/>
                 <img src={Profile_Img} alt=""/>
@@ -22,12 +19,12 @@ const ProfileCard = () => {
             <div className="followStatus">
                 <hr />
                 <div>
-                    <div className="follow">
+                    <div className="followers">
                         <span>1024</span>
                         <span>Followers</span>
                     </div>
-                    <div className="vert"></div>
-                    <div className="follow">
+
+                    <div className="following">
                         <span>2</span>
                         <span>Following</span>
                     </div>

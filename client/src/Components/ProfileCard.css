@@ -1,6 +1,3 @@
-.MyProfile{
-    font-size: 26px;
-}
 
 .ProfileCard{
     margin-top: 5rem;
@@ -10,8 +7,9 @@
     position: relative;
     gap: 0.05rem;
     overflow-x: clip;
-    background: whitesmoke;
+    background: white;
 }
+
 
 .ProfileImages{
     position: relative;
@@ -45,6 +43,7 @@
 
 .ProfileName>span:nth-of-type(1){
     font-weight: bold;
+    font-size: 24px;
 }
 
 .followStatus{
@@ -68,7 +67,7 @@
     align-items: center;
 }
 
-.follow {
+.followers {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
@@ -76,12 +75,29 @@
     justify-content: center;
 }
 
-.follow > span:nth-of-type(1) {
+.following {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.followers > span:nth-of-type(1) {
     font-weight: bold;
 }
 
-.follow > span:nth-of-type(2) {
-    color: var(--black);
+.followers > span:nth-of-type(2) {
+    color: black;
+    font-size: 13px;
+}
+
+.following > span:nth-of-type(1) {
+    font-weight: bold;
+}
+
+.following > span:nth-of-type(2) {
+    color: black;
     font-size: 13px;
 }
 
