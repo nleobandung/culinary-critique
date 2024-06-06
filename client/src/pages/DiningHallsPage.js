@@ -90,7 +90,6 @@ function DiningHallsPage() {
             </div>
           )}
         </div>
-        <h2 className="dininghalls-h2">Recent Menu Options!</h2>
         <h2 className="dininghalls-h2">Top 5 Rated Dining Halls</h2>
         {topProfiles.map(renderDiningHall)}
         <h2 className="dininghalls-h2">Worst 5 Rated Dining Halls</h2>
