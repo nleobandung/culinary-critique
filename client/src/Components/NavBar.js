@@ -51,7 +51,10 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/create-food">Explore</Link>
+          <Link to="/create-food">Add Food Location</Link>
+        </li>
+        <li>
+          <Link to="/explore">Explore</Link>
         </li>
         <li>
         <div className="about-user-wrapper">
@@ -63,14 +66,24 @@ function NavBar() {
         </div>
 
         </li>
+        <div className="nav-search-container">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="nav-search"
+          />
+          <SearchResults filteredProfiles={filteredProfiles} />
+        </div>
         <div className="nav-profile-wrapper">
           {userData.isLoggedIn ? (
-            <Link to="/login" className="nav-profile">Log Out</Link>
+            <Link to="/account-settings" className="nav-profile">Account</Link>
           ) : (
             <Link to="/login" className="nav-profile">Log In</Link>
           )}
         </div>
-        </ul>
+      </ul>
     </nav>
   );
 }

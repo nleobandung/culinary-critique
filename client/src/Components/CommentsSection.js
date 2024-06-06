@@ -1,73 +1,71 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from 'react-router-dom';
 import { getComments, addComment } from '../api.js';
-import { Link } from "react-router-dom";
-import { UserDataContext } from "../context/UserDataProvider"
+import "./CommentsSection.css";
+import { UserDataContext } from '../context/UserDataProvider.js'
 
-const CommentsSection = ({ profileName }) =>  {
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
-    const { userData } = useContext(UserDataContext);
+const CommentsSection = ({ profileName }) => {
+  const [comment, setComment] = useState("");
+  const { userData } = useContext(UserDataContext);
+  const [comments, setComments] = useState([]);
 
-    useEffect(() => {
-        fetchComments();
-        const intervalId = setInterval(() => {
-            fetchComments();
-        }, 5000);
-
-        return () => clearInterval(intervalId);
-    }, []);
-
+  useEffect(() => {
     const fetchComments = async () => {
-        try {
-            const profileComments = await getComments(profileName);
-            setComments(profileComments);
-        } catch (error) {
-            console.error('Error fetching comments:', error);
-        }
+      try {
+        const fetchedComments = await getComments(profileName);
+        setComments(fetchedComments);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
     };
 
-    const handleCommentChange = (event) => {
-        setNewComment(event.target.value);
-      };
-    
-    const handleAddComment = async () => {
-        try {
-            await addComment({ profileName: profileName, username: userData.username, text: newComment });
-            fetchComments();
-            setNewComment('');
-        } catch (error) {
-            console.error('Error adding comment:', error);
-        }
-    };
+    fetchComments();
+  }, [profileName]);
 
-return (
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (comment.trim()) {
+      await addComment(profileName, userData.username, comment);
+      setComment("");
+      const fetchedComments = await getComments(profileName);
+      setComments(fetchedComments);
+    }
+  };
+
+  return (
     <div className="comments-section">
-        <h2>Comments</h2>
-        <ul className="comment-list">
-            {comments.map((comment, index) => (
-                <li key={index} className="comment">
-                    <div>{comment.username}: {comment.text}</div>
-                </li>
-            ))}
+      <h2>Comments</h2>
+      <div className="comments-list">
+        <ul>
+          {comments && comments.map((comment, index) => (
+            <li key={index} className="comment">
+              <div className="comment-header">
+                <span className="comment-author">{comment.username}</span>
+                <span className="comment-date">{new Date(comment.date).toLocaleDateString()}</span>
+              </div>
+              <div className="comment-body">
+                {comment.text}
+              </div>
+            </li>
+          ))}
         </ul>
+      </div>
+      <form onSubmit={handleSubmit} className="comment-form">
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Add a comment..."
+        ></textarea>
         {userData.isLoggedIn ? (
-        <div>
-            <textarea
-                rows="4"
-                cols="50"
-                value={newComment}
-                onChange={handleCommentChange}
-                placeholder="Add a comment..."
-            />
-            <button onClick={handleAddComment}>Add Comment</button>
-        </div>
+          <button type="submit">Post Comment</button>
         ) : (
-            <div className="login-wrapper">
-            <Link to="/login" className="login">Login to add a comment</Link>
-            </div>
+          <div className="login-wrapper">
+            <Link to="/login">Log in</Link> to post a comment 
+          </div>
         )}
+      </form>
     </div>
-    );
+  );
 };
 
 export default CommentsSection;
