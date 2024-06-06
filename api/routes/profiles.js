@@ -20,6 +20,27 @@ router.get('/profile/:name', async (req, res) => {
     }
 });
 
+router.get('/userRating', async (req, res) => {
+    try {
+        const { username, profileName } = req.query;
+        if (!username || !profileName) {
+            return res.status(400).json({ error: 'Username and profileName are required' });
+        }
+        const profile = await Profile.findOne({ name: profileName });
+        if (!profile) {
+            return res.status(404).json({ error: 'Profile not found' });
+        }
+
+        const userRating = profile.ratings.find(rating => rating.username === username);
+        const rating = userRating ? userRating.stars : 0;
+
+        res.status(200).json({ userRating: rating });
+    } catch (error) {
+        console.error('Error retrieving user rating:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 router.get('/comments', async (req, res) => {
     try {
         const { profileName } = req.query;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProfileInfo, rateProfile } from '../api.js';
+import { getProfileInfo, rateProfile, getUserRating } from '../api.js';
 import "./ProfilePage.css";
 import CommentsSection from '../Components/CommentsSection';
 import { UserDataContext } from "../context/UserDataProvider";
@@ -20,6 +20,12 @@ const ProfilePage = () => {
           const { averageRating, numberOfRatings} = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
+
+          if (userData.isLoggedIn) {
+            const userRating = await getUserRating(userData.username, profileName);
+            setRating(userRating);
+          }
+
         } catch (error) {
           console.error('Error fetching profile info:', error);
         }
@@ -27,7 +33,7 @@ const ProfilePage = () => {
     };
 
     fetchProfileInfo();
-  }, [profileName]);
+  }, [profileName, userData.username, userData.isLoggedIn]);
 
   useEffect(() => {
     setStars(avgRatings);
@@ -54,8 +60,9 @@ const ProfilePage = () => {
 
   function setStars(rating) {
     const stars = document.querySelectorAll('.star');
+    const roundedRating = Math.round(rating);
     stars.forEach((star, index) => {
-      if (index < rating) {
+      if (index < roundedRating) {
         star.style.color = 'gold';
       } else {
         star.style.color = 'gray';
