@@ -54,11 +54,12 @@ function NavBar() {
           <Link to="/explore">Explore</Link>
         </li>
         <li>
+        
         <div className="about-user-wrapper">
           {userData.isLoggedIn ? (
             <Link to="/usr">Profile</Link>
           ) : (
-            <Link to="/about">About</Link>
+            <Link to="/about1">About</Link>
           )}
         </div>
 
