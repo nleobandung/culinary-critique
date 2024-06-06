@@ -1,30 +1,41 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { uploadProfilePhoto } from '../api';
+import { uploadProfilePhoto, getProfilePhoto } from '../api';
 import { UserDataContext } from "../context/UserDataProvider";
 import './AccountSettingsPage.css';
 
 function AccountSettingsPage() {
   const [file, setFile] = useState(null);
+  const [photoURL, setPhotoURL] = useState('');
   const { userData, setUserData } = useContext(UserDataContext);
+
+  useEffect(() => {
+    const fetchProfilePhoto = async () => {
+      try {
+        const photoURL = await getProfilePhoto(userData.username);
+        setPhotoURL(photoURL);
+      } catch (error) {
+        console.error('Error fetching profile photo:', error);
+      }
+    };
+
+    if (userData.username) {
+      fetchProfilePhoto();
+    }
+  }, [userData.username, photoURL]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
   };
 
-  const handleUploadClick = () => {
+  const handleUploadClick = async () => {
     if (file) {
-      uploadProfilePhoto(userData.username, file).then((photoURL) => {
-        setUserData({ ...userData, photoURL });
-      });
+      const newPhotoURL = await uploadProfilePhoto(userData.username, file);
+      setPhotoURL(newPhotoURL);
     } else {
       alert('Please select a file first.');
     }
-  };
-
-  const handleLogout = () => {
-    // Add logout logic here, e.g., clear user data, redirect to login page, etc.
   };
 
   return (
@@ -35,8 +46,8 @@ function AccountSettingsPage() {
           <p>Username: <span>{userData.username}</span></p>
           <div className="profile-photo">
             <p>Profile Photo:</p>
-            {userData.photoURL ? (
-              <img src={userData.photoURL} alt="Profile" className="profile-image" />
+            {photoURL ? (
+              <img src={photoURL} alt="Profile" className="profile-image" />
             ) : (
               <p>No profile photo uploaded.</p>
             )}
@@ -47,7 +58,7 @@ function AccountSettingsPage() {
           <input type="file" onChange={handleFileChange} />
           <button onClick={handleUploadClick} className="upload-button">Upload</button>
         </div>
-        <Link to="/login" onClick={handleLogout} className="logout-button">Log Out</Link>
+        <Link to="/login" className="logout-button">Log Out</Link>
       </div>
     </div>
   );
