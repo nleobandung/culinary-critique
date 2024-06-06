@@ -175,6 +175,20 @@ export const addComment = async (profileName, username, text) => {
   }
 }
 
+export const getProfileNamesAndImages = async () => {
+  try {
+    const response = await fetch(`${API_URL}/profiles/profileNamesImages`);
+    if (!response.ok) {
+      throw new Error(`Error retrieving profile names and images: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error retrieving profile names and images:', error);
+    throw error;
+  }
+}
+
 export const getProfileNames = async () => {
   try {
     const response = await fetch(`${API_URL}/profiles/profileNames`);

@@ -56,6 +56,17 @@ router.post('/addComment', async (req, res) => {
     }
 });
 
+router.get('/profileNamesImages', async (req, res) => {
+    try {
+        const profiles = await Profile.find({}, 'name imageLink');
+        res.status(200).json(profiles);
+
+    } catch (error) {
+        console.error('Error fetching profile names and images:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 router.get('/profileNames', async (req, res) => {
     try {
         const profiles = await Profile.find();
