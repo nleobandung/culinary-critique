@@ -222,6 +222,25 @@ export const getTop5 = async () => {
   }
 };
 
+export const getUserRating = async (username, profileName) => {
+  try {
+    const encodedUsername = encodeURIComponent(username);
+    const encodedProfileName = encodeURIComponent(profileName);
+
+    const response = await fetch(`${API_URL}/profiles/userRating?username=${encodedUsername}&profileName=${encodedProfileName}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving user rating: ${response.statusText}`);
+    }
+    const { userRating } = await response.json();
+    return userRating;
+
+  } catch (error) {
+    console.error('Error retrieving user rating:', error);
+    throw error;
+  }
+};
+
 export const getProfileInfo = async (name) => {
   try {
     const response = await fetch(`${API_URL}/profiles/profileInfo`, {
