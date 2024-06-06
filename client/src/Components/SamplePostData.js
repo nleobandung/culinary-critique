@@ -6,6 +6,9 @@ import food3 from "./Media/foods/food3.jpg"
 export const PostsData = [
     {
         img: food,
+        logo_img: "unkown",
+        dining_hall: "De Neve",
+        date: "0/14/24",
         name: 'Bryan',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         likes: 2300,
@@ -13,6 +16,9 @@ export const PostsData = [
     },
     {
         img: food2,
+        logo_img: "unkown",
+        dining_hall: "Bruin Plate",
+        date: "2/155/213",
         name: 'Nathan',
         desc: 'food sucks',
         likes: 23,
@@ -21,8 +27,21 @@ export const PostsData = [
     {
         img: food3,
         name: 'Marco',
+        logo_img: "unkown",
+        dining_hall: "Rendevous",
+        date: "4/8/24",
         desc: 'Im not sure how I feel about the food',
         likes: 14,
         liked: true
+    },
+    {
+        img: null,
+        name: 'Thanos',
+        logo_img: "unkown",
+        dining_hall: "My Restaurant",
+        date: "1/2/3",
+        desc: 'THANOS1 PEEK',
+        likes: 12312412413,
+        liked: false
     }
 ]

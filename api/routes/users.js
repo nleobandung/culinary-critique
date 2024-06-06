@@ -98,4 +98,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+//get all display names
+router.get('/usr', async (req, res) => {
+    try {
+        const users = await User.find({}, 'display_name -_id');
+        const names = users.map(user => user.display_name)
+        res.json(names);
+    } catch (error) {
+        console.error('Error fetching nicknames:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 export default router;
