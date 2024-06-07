@@ -46,8 +46,8 @@ ATLAS_URI={insert mongoDB link}
 ```
 
 #### Running
+In the api terminal run
 ```
-cd backend
 npm start
 ```
 
@@ -66,9 +66,8 @@ REACT_APP_PORT={insert port number}
 ```
 
 #### Running
-To start the frontend application, run:
+To start the frontend application, in the client terminal, run:
 ```
-cd client
 npm start
 ```
 
