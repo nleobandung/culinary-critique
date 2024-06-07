@@ -55,7 +55,7 @@ router.post('/change-profile-photo', async (req, res) => {
         if (!user) {
             return res.status(400).json({ message: 'Username not found' });
         }
-        user.profilePhoto = `https://${process.env.S3_BUCKET}.s3.${process.env.REGION}.amazonaws.com/${fileName}`;
+        user.profilePhoto = `https://culinary-critique.s3.us-west-1.amazonaws.com/${fileName}`;
 
         await user.save();
         res.status(200).json({ message: 'Profile photo successfully changed' });
@@ -122,6 +122,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 //get all display names
 router.get('/usr/display-names', async (req, res) => {
@@ -221,6 +222,7 @@ router.get('/usr/followers/photos', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 
 export default router;

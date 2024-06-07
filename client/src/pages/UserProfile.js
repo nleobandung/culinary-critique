@@ -3,6 +3,7 @@ import ProfileCard from "../Components/ProfileCard"
 import "./UserProfile.css"
 import UserPosts from "../Components/UserPosts"
 import FollowersWidget from "../Components/Followers"
+
 import {getDisplayName} from '../api.js'
 
 import { getFollowers } from "../api.js";
@@ -10,6 +11,7 @@ import { getFollowersID } from "../api.js";
 import { getFollowersUser } from "../api.js";
 import { getFollowersPhotos } from "../api.js";
 import img1 from "../Components/Media/logos/Logo_Feast.jpg"
+
 
 import { getUserComments } from "../api.js";
 import { UserDataContext } from '../context/UserDataProvider.js';
@@ -41,7 +43,9 @@ function compileFollowData(usernames, ids, stati, photos) {
 
 function UserProfile() {
 
+
     const [displayNames, setDisplayNames] = useState([]);
+
     const [userComments, setUserComments] = useState([]);
     const { userData } = useContext(UserDataContext);
 
@@ -76,11 +80,11 @@ function UserProfile() {
         catch (error){
             console.error("Error fetching user profiles", error);
         }
-
     }
 
     const getData = async() => {
         try{
+
             const comments = await getUserComments(userData.username);
             setUserComments(comments);
         }

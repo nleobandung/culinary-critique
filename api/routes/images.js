@@ -1,5 +1,5 @@
 import express from 'express';
-import AWS from 'aws-sdk';
+import { S3 } from '@aws-sdk/client-s3';
 import multer from 'multer';
 import dotenv from 'dotenv';
 
@@ -8,13 +8,13 @@ dotenv.config();
 const router = express.Router();
 const upload = multer();
 
-// AWS credentials
-AWS.config.update({
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+const s3 = new S3({
+    region: "us-west-1",
+    credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    },
 });
-
-const s3 = new AWS.S3();
 
 router.post('/upload', upload.single('image'), async (req, res) => {
     try {
@@ -25,7 +25,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         }
 
         const params = {
-            Bucket: process.env.S3_BUCKET,
+            Bucket: "culinary-critique",
             Key: file.originalname,
             Body: file.buffer,
         };

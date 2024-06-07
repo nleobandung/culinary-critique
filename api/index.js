@@ -21,7 +21,7 @@ app.use(express.json());
 // MongoDB connection
 const dbURI = process.env.ATLAS_URI || "";
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI)
     .then(() => {
         console.log("MongoDB connected...");
 

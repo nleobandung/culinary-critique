@@ -7,7 +7,7 @@ import './AccountSettingsPage.css';
 function AccountSettingsPage() {
   const [file, setFile] = useState(null);
   const [photoURL, setPhotoURL] = useState('');
-  const { userData, setUserData } = useContext(UserDataContext);
+  const { userData } = useContext(UserDataContext);
 
   useEffect(() => {
     const fetchProfilePhoto = async () => {
@@ -26,7 +26,11 @@ function AccountSettingsPage() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFile(file);
+    if (file && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
+      setFile(file);
+    } else {
+      alert('Please select a JPG file.');
+    }
   };
 
   const handleUploadClick = async () => {
