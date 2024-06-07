@@ -32,7 +32,7 @@ const ProfileCard = () => {
             </div>
 
             <div className="ProfileName">
-                <span>Gordon Rams</span>
+                <span>{userData.username}</span>
             </div>
 
             <div className="followStatus">
