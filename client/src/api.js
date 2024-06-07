@@ -146,6 +146,7 @@ export const getProfileInfo = async (name) => {
       throw new Error(`Error fetching rating count: ${response.statusText}`);
     }
     const data = await response.json();
+    console.log(data.imageLink);
     return data;
   } catch (error) {
     console.error('Error fetching rating count:', error);

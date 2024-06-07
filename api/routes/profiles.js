@@ -110,7 +110,7 @@ router.post('/profileInfo', async (req, res) => {
             return res.status(404).json({ message: 'Profile not found'});
         }
 
-        res.json({ averageRating: profile.averageRating.toFixed(2), numberOfRatings: profile.numberOfRatings });
+        res.json({ averageRating: profile.averageRating.toFixed(2), numberOfRatings: profile.numberOfRatings, imageLink: profile.imageLink });
     } catch (error) {
         console.error('Error fetching profile info:', error);
         res.status(500).json({ message: 'Internal server error' });

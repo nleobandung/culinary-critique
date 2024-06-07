@@ -136,6 +136,7 @@ const ProfilePage = () => {
   const [avgRatings, setAvgRatings] = useState(0);
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
+  const [imageLink, setImageLink] = useState("");
   const { userData } = useContext(UserDataContext);
   const { name: profileName } = useParams();
 
@@ -143,10 +144,11 @@ const ProfilePage = () => {
     const fetchProfileInfo = async () => {
       if (profileName) {
         try {
-          const { averageRating, numberOfRatings, comments } = await getProfileInfo(profileName);
+          const { averageRating, numberOfRatings, comments, imageLink: photo } = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
-          setComments(comments || []);
+          setComments(comments || []);;
+          setImageLink(photo);
         } catch (error) {
           console.error('Error fetching profile info:', error);
         }
@@ -203,7 +205,7 @@ const ProfilePage = () => {
     <div className="profile-page-wrapper">
       <header className="ProfilePage-header">
         <h1>{profileName}</h1>
-        <img className="profile-image"src={deNeveAvatar} alt="Profile Image" img/>
+        <img className="profile-image"src={imageLink} alt="Profile Image" img/>
         <div className="rating">
           <span className="star">★</span>
           <span className="star">★</span>
