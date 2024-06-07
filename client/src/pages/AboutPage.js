@@ -12,7 +12,18 @@ function AboutPage() {
         options, the best comfort food, or the quickest service, our community-driven reviews cover all aspects
         of campus dining experiences.
       </p>
-      <p>Log in to start!</p>
+      <h2>What is Culinary Critique?</h2>
+      <p>
+        Culinary Critique is a community-driven platform where students and staff can share their dining experiences across UCLA.
+      </p>
+      <h2>Who developed Culinary Critique?</h2>
+      <p>
+        Culinary Critique was developed by a dedicated team of students. You can see the source code at this <a href="https://github.com/nleobandung/culinary-critique">link</a>.
+      </p>
+      <h2>How can I start using Culinary Critique?</h2>
+      <p>
+        Log in today to start using Culinary Critique and share your dining experiences!
+      </p>
     </div>
   );
 }
