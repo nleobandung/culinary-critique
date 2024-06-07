@@ -426,3 +426,21 @@ export const getFollowersPhotos = async (user) => {
     throw error;
   }
 }
+
+//fetching suggested people's data
+export const getFollowersSuggested = async (user) => {
+  try {
+    const response = await fetch(`${API_URL}/users/usr/followers/suggested?username=${encodeURIComponent(user)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving followers photos: ${response.statusText}`);
+    }
+
+    const suggested = await response.json();
+    return suggested;
+
+  } catch (error) {
+    console.error('Error retrieving followers photos:', error);
+    throw error;
+  }
+}

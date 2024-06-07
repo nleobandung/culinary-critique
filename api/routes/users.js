@@ -212,9 +212,9 @@ router.get('/usr/followers/photos', async (req, res) => {
         const users = await User.find({ _id: { $in: objectIDs } }, 'profilePhoto');
         const profPhotos = users.map(user => user.profilePhoto);
 
-        profPhotos.forEach(function(entry) {
-            console.log(entry)  
-        });
+        // profPhotos.forEach(function(entry) {
+        //     console.log(entry)  
+        // });
 
         res.json(profPhotos);
     } catch (error) {
@@ -222,6 +222,40 @@ router.get('/usr/followers/photos', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+//get suggested people's object ids
+router.get('/usr/followers/suggested', async (req, res) => {
+    try {
+        console.log("decoding5..")
+        const user = await User.findOne({username: req.query.username});
+        const followers = user.followers;
+        const ids = followers.map(follower => follower.followerID);
+
+        const objectIDs = ids.map(id => {
+            if (ObjectId.isValid(id)) {
+            return new ObjectId(id);
+            } else {
+            throw new Error(`Invalid ID: ${id}`);
+            }
+        });
+
+        //don't suggest your own ID
+        objectIDs.push(user.id)
+
+        const users = await User.find({ _id: { $nin: objectIDs } }, 'username');
+        const suggested = users.map(user => user.id);
+
+        suggested.forEach(function(entry) {
+            console.log(entry)  
+        });
+
+        res.json(suggested);
+    } catch (error) {
+        console.error('Error fetching suggested:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 
 
 

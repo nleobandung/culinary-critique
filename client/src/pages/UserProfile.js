@@ -10,6 +10,7 @@ import { getFollowers } from "../api.js";
 import { getFollowersID } from "../api.js";
 import { getFollowersUser } from "../api.js";
 import { getFollowersPhotos } from "../api.js";
+import { getFollowersSuggested } from "../api.js";
 import img1 from "../Components/Media/logos/Logo_Feast.jpg"
 
 
@@ -61,10 +62,11 @@ function UserProfile() {
     }, [userData.username, userComments]);
 
     useEffect(() => {
-        getF();
+        getFoll();
+        getSugg();
     }, []);
 
-    const getF = async() => {
+    const getFoll = async() => {
         try{
             const status = await getFollowers(user);
     
@@ -79,6 +81,15 @@ function UserProfile() {
         }
         catch (error){
             console.error("Error fetching user profiles", error);
+        }
+    }
+
+    const getSugg = async() => {
+        try{
+            const suggest = await getFollowersSuggested(user);
+        }
+        catch (error){
+            console.error("Error fetching sugg", error);
         }
     }
 
