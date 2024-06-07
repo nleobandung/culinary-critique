@@ -1,11 +1,33 @@
 import express from 'express';
 import User from '../models/User.js';
+import Profile from '../models/Profile.js'
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const router = express.Router();
+
+// Get comments
+router.get('/get-comments', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.query.username });
+        if (!user) {
+            return res.status(400).json({ message: 'Username not found' });
+        }
+
+        const profiles = await Profile.find({ 'comments._id': { $in: user.comments } })
+            .populate('comments', 'username text profileName date').exec();
+        
+        const allComments = profiles.flatMap(profile => profile.comments);
+        const validCommentIds = user.comments.map(id => id.toString());
+        const comments = allComments.filter(comment => validCommentIds.includes(comment._id.toString()));
+        res.json({ comments });
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // Get profile photo
 router.get('/get-profile-photo', async (req, res) => {

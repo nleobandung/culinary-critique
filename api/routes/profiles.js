@@ -1,5 +1,7 @@
 import express from 'express';
-import Profile from '../models/Profile.js'
+import Profile from '../models/Profile.js';
+import User from '../models/User.js';
+import Comment from '../models/Comment.js';
 
 const router = express.Router();
 
@@ -65,14 +67,25 @@ router.post('/addComment', async (req, res) => {
             return res.status(404).json({ message: 'Profile not found'});
         }
 
-        profile.comments.push({ username, text });
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const comment = new Comment({ username, text, profileName });
+        profile.comments.push(comment);
         await profile.save();
+
+        user.comments.push(comment._id);
+        await user.save();
+
         res.json({
             message: 'Comment added successfully',
         });
 
     } catch (error) {
-        console.error('Error adding rating:', error);
+        console.error('Error adding comment:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
