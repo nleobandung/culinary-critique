@@ -30,6 +30,22 @@ export const uploadImage = async (image) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for users
 ///////////////////////////////////////////////////////////////////////////
+export const getUserComments = async(username) => {
+  try {
+    const response = await fetch(`${API_URL}/users/get-comments?username=${encodeURIComponent(username)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching user comments: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    console.error('Error fetching user comments:', error);
+    throw error;
+  }
+}
+
 export const getProfilePhoto = async(username) => {
   try {
     const response = await fetch(`${API_URL}/users/get-profile-photo?username=${encodeURIComponent(username)}`);
