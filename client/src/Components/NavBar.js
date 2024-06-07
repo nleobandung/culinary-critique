@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './NavBar.css';
 import { getProfileNames } from '../api.js';
 import SearchResults from './SearchResults';
-import { UserDataContext } from "../context/UserDataProvider"
+import { UserDataContext } from "../context/UserDataProvider";
 
 function NavBar() {
   const { userData } = useContext(UserDataContext);
@@ -57,23 +57,30 @@ function NavBar() {
           <Link to="/about1">About</Link>
         </li>
         <li>
-        
-        <div className="about-user-wrapper">
-          {userData.isLoggedIn ? (
-            <Link to="/usr">Profile</Link>
-          ) : null
-          }
-        </div>
-
+          <div className="about-user-wrapper">
+            {userData.isLoggedIn ? (
+              <Link to="/usr">Profile</Link>
+            ) : null}
+          </div>
         </li>
+        <div className="nav-search-container">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="nav-search"
+          />
+          <SearchResults filteredProfiles={filteredProfiles} />
+        </div>
         <div className="nav-profile-wrapper">
           {userData.isLoggedIn ? (
-            <Link to="/login" className="nav-profile">Log Out</Link>
+            <Link to="/account-settings" className="nav-profile">Account</Link>
           ) : (
             <Link to="/login" className="nav-profile">Log In</Link>
           )}
         </div>
-        </ul>
+      </ul>
     </nav>
   );
 }

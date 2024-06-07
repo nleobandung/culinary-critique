@@ -9,6 +9,7 @@
 
 .follower{
     display: flex;
+    align-items: stretch;
     gap: 10px;
 }
 
@@ -41,3 +42,4 @@
     background: rgb(108, 108, 221);
     transition: all 100ms ease-out;
 }
+

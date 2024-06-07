@@ -1,10 +1,11 @@
+
 .Post{
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1.3rem;
     background-color: whitesmoke;
     border-radius: 1rem;
-    gap: 1rem;
+    gap: 0.2rem;
 }
 
 .Post>img{
@@ -14,8 +15,22 @@
     border-radius: 0.5rem;
 }
 
+.numLikes{  
+    margin-top: 1px;
+    margin-left: -13px;
+}
+
 .postReact{
+    margin-top: 1rem;
     display: flex;
     align-items: start;
     gap: 1.5rem;
+}
+
+.readMore{
+    margin-left: -5px;
+    border-width: 0;
+    background-color: whitesmoke;
+    text-align: left;
+    color: gray;
 }

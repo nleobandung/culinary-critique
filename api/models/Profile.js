@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const ratingSchema = new mongoose.Schema({
     stars: { type: Number, required: true, min: 1, max: 5},
