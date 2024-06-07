@@ -42,7 +42,7 @@ which should download a set of `node_modules` for the backend server.
 Create a `.env` file in the api folder with the following contents:
 ```
 PORT={insert port number}
-ATLAS_URI=mongodb+srv://admin:admin@cluster0.gupgvul.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+ATLAS_URI={insert mongoDB link}
 ```
 
 #### Running
