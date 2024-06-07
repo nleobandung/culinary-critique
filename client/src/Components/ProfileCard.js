@@ -6,6 +6,8 @@ import { getProfilePhoto } from "../api";
 import { UserDataContext } from "../context/UserDataProvider";
 
 
+
+
 const ProfileCard = () => {
     const [profilePhoto, setProfilePhoto] = useState(null);
     const { userData } = useContext(UserDataContext);
@@ -30,7 +32,7 @@ const ProfileCard = () => {
             </div>
 
             <div className="ProfileName">
-                <span>Gordon Ramsay</span>
+                <span>Gordon ramsay</span>
                 <span>Senior Chef</span>
             </div>
 

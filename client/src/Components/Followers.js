@@ -1,10 +1,10 @@
 import "./Followers.css"
-import { Followers } from "./SampleFollowersData"
 import { Box, Tab, Tabs } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const FollowersWidget = () => {
+const FollowersWidget = ({user, Followers}) => {
+    //handle tab changing
     const [value, setValue] = useState('1');
 
     const handleChange = (event, newValue) => {
@@ -82,7 +82,12 @@ const FollowersWidget = () => {
                     </div>
                 </TabPanel>
             </TabContext>
-
+            <form>
+                <label>
+                    Search User:
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
         </div>
     )
 }

@@ -290,7 +290,7 @@ export const createProfile = async (profileName) => {
 //fetching users' display names
 export const getDisplayName = async () => {
   try {
-    const response = await fetch(`${API_URL}/users/usr`);
+    const response = await fetch(`${API_URL}/users/usr/display-names`);
 
     if (!response.ok) {
       throw new Error(`Error retrieving display names: ${response.statusText}`);
@@ -301,6 +301,72 @@ export const getDisplayName = async () => {
 
   } catch (error) {
     console.error('Error retrieving display names:', error);
+    throw error;
+  }
+}
+
+//fetching users' followers status Array 
+export const getFollowers = async (user) => {
+  try {
+    console.log("my brother in christ I am trying to fetch")
+    // const response = await fetch(`${API_URL}/users/usr/followers`, {
+    //   method: 'GET',
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     // 'Content-Type': 'application/x-www-form-urlencoded',
+    //   },
+    //   body: JSON.stringify({username: user})
+    // });
+
+    const response = await fetch(`${API_URL}/users/usr/followers/status?username=${encodeURIComponent(user)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving followers: ${response.statusText}`);
+    }
+
+    const names = await response.json();
+    return names;
+
+  } catch (error) {
+    console.error('Error retrieving followers:', error);
+    throw error;
+  }
+}
+
+//fetching followers id array
+export const getFollowersID = async (user) => {
+  try {
+
+    const response = await fetch(`${API_URL}/users/usr/followers/id?username=${encodeURIComponent(user)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving followers IDs: ${response.statusText}`);
+    }
+
+    const ids = await response.json();
+    return ids;
+
+  } catch (error) {
+    console.error('Error retrieving followers IDs:', error);
+    throw error;
+  }
+}
+
+//fetching user ids
+export const getFollowersUser = async (user) => {
+  try {
+
+    const response = await fetch(`${API_URL}/users/usr/followers/usernames?username=${encodeURIComponent(user)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving followers usernames: ${response.statusText}`);
+    }
+
+    const ids = await response.json();
+    return ids;
+
+  } catch (error) {
+    console.error('Error retrieving followers usernames:', error);
     throw error;
   }
 }
