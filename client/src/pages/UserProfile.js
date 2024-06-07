@@ -1,15 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import ProfileCard from "../Components/ProfileCard"
 import "./UserProfile.css"
 import UserPosts from "../Components/UserPosts"
 import FollowersWidget from "../Components/Followers"
 import {getDisplayName} from '../api.js'
-import { getComments } from "../api.js";
 
 import { getFollowers } from "../api.js";
 import { getFollowersID } from "../api.js";
 import { getFollowersUser } from "../api.js";
 import img1 from "../Components/Media/logos/Logo_Feast.jpg"
+
+import { getUserComments } from "../api.js";
+import { UserDataContext } from '../context/UserDataProvider.js';
+
 
 function compileFollowData(usernames, ids, stati) {
     const Follow = [];
@@ -37,6 +40,11 @@ function compileFollowData(usernames, ids, stati) {
 
 function UserProfile() {
 
+    const [displayNames, setDisplayNames] = useState([]);
+    const [userComments, setUserComments] = useState([]);
+    const { userData } = useContext(UserDataContext);
+
+
     //enumerate constants
     const [user, setUser] = useState("bryan");
     const [userNickName, setUserNickName] = useState("")
@@ -45,10 +53,11 @@ function UserProfile() {
     //handle getting the data
     useEffect(() => {
         getData();
-    }, []);
+    }, [userData.username, userComments]);
 
     const getData = async() => {
         try{
+
             const status = await getFollowers(user);
     
             const ids = await getFollowersID(user);
@@ -57,13 +66,18 @@ function UserProfile() {
     
             const data = compileFollowData(usernames, ids, status);
             setFollowers(data);
+
+            const data = await getDisplayName();
+            setDisplayNames(data);
+
+            const comments = await getUserComments(userData.username);
+            setUserComments(comments);
         }
         catch (error){
             console.error("Error fetching user profiles", error);
         }
     }
     
-
 
     return(
     <div className="Page">
@@ -77,7 +91,7 @@ function UserProfile() {
             </div>  
         </div>
         <div className="Posts">
-            <UserPosts />
+            <UserPosts data={userComments.comments}/>
         </div>
     </div>
     )

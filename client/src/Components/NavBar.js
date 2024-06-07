@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './NavBar.css';
 import { getProfileNames } from '../api.js';
 import SearchResults from './SearchResults';
-import { UserDataContext } from "../context/UserDataProvider"
+import { UserDataContext } from "../context/UserDataProvider";
 
 function NavBar() {
   const { userData } = useContext(UserDataContext);
@@ -51,20 +51,17 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/create-food">Add Food Location</Link>
-        </li>
-        <li>
           <Link to="/explore">Explore</Link>
         </li>
         <li>
-        <div className="about-user-wrapper">
-          {userData.isLoggedIn ? (
-            <Link to="/usr">Profile</Link>
-          ) : (
-            <Link to="/about">About</Link>
-          )}
-        </div>
-
+          <Link to="/about1">About</Link>
+        </li>
+        <li>
+          <div className="about-user-wrapper">
+            {userData.isLoggedIn ? (
+              <Link to="/usr">Profile</Link>
+            ) : null}
+          </div>
         </li>
         <div className="nav-search-container">
           <input

@@ -30,6 +30,22 @@ export const uploadImage = async (image) => {
 ///////////////////////////////////////////////////////////////////////////
 //  API calls for users
 ///////////////////////////////////////////////////////////////////////////
+export const getUserComments = async(username) => {
+  try {
+    const response = await fetch(`${API_URL}/users/get-comments?username=${encodeURIComponent(username)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching user comments: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+    console.error('Error fetching user comments:', error);
+    throw error;
+  }
+}
+
 export const getProfilePhoto = async(username) => {
   try {
     const response = await fetch(`${API_URL}/users/get-profile-photo?username=${encodeURIComponent(username)}`);
@@ -222,6 +238,25 @@ export const getTop5 = async () => {
   }
 };
 
+export const getUserRating = async (username, profileName) => {
+  try {
+    const encodedUsername = encodeURIComponent(username);
+    const encodedProfileName = encodeURIComponent(profileName);
+
+    const response = await fetch(`${API_URL}/profiles/userRating?username=${encodedUsername}&profileName=${encodedProfileName}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving user rating: ${response.statusText}`);
+    }
+    const { userRating } = await response.json();
+    return userRating;
+
+  } catch (error) {
+    console.error('Error retrieving user rating:', error);
+    throw error;
+  }
+};
+
 export const getProfileInfo = async (name) => {
   try {
     const response = await fetch(`${API_URL}/profiles/profileInfo`, {
@@ -304,6 +339,7 @@ export const getDisplayName = async () => {
     throw error;
   }
 }
+
 
 //fetching users' followers status Array 
 export const getFollowers = async (user) => {

@@ -1,49 +1,86 @@
-.login-container { 
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: white;
-  text-shadow: 2px 2px 4px #000;
+  color: #333;
+  text-shadow: none;
 }
 
 .login-logo {
   font-size: 3em;
   margin-bottom: 20px;
+  color: #6C33A3;
+  text-shadow: 2px 2px 4px #aaa;
 }
 
 .login-form {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
+  background: #fff;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
 }
 
 .login-label {
   display: block;
   margin: 10px 0 5px;
+  color: #555;
+  font-weight: bold;
 }
 
 .login-input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .login-button {
   width: 100%;
   padding: 10px;
-  background: #4CAF50;
+  background: #6C33A3;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin-top: 10px;
+  transition: background 0.3s;
 }
 
 .login-button:hover {
   background: #45a049;
+}
+
+.login-button:active {
+  background: #3e8e41;
+}
+
+.register-button {
+  background: #2196F3;
+}
+
+.register-button:hover {
+  background: #1e87db;
+}
+
+.register-button:active {
+  background: #1a75bd;
+}
+
+.login-link {
+  color: #1a75bd;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+.login-link:hover {
+  color: #45a049;
 }

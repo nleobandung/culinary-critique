@@ -1,5 +1,7 @@
 import express from 'express';
-import Profile from '../models/Profile.js'
+import Profile from '../models/Profile.js';
+import User from '../models/User.js';
+import Comment from '../models/Comment.js';
 
 const router = express.Router();
 
@@ -17,6 +19,27 @@ router.get('/profile/:name', async (req, res) => {
     } catch (error) {
       console.error('Error fetching profile:', error);
       res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/userRating', async (req, res) => {
+    try {
+        const { username, profileName } = req.query;
+        if (!username || !profileName) {
+            return res.status(400).json({ error: 'Username and profileName are required' });
+        }
+        const profile = await Profile.findOne({ name: profileName });
+        if (!profile) {
+            return res.status(404).json({ error: 'Profile not found' });
+        }
+
+        const userRating = profile.ratings.find(rating => rating.username === username);
+        const rating = userRating ? userRating.stars : 0;
+
+        res.status(200).json({ userRating: rating });
+    } catch (error) {
+        console.error('Error retrieving user rating:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
@@ -44,14 +67,25 @@ router.post('/addComment', async (req, res) => {
             return res.status(404).json({ message: 'Profile not found'});
         }
 
-        profile.comments.push({ username, text });
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const comment = new Comment({ username, text, profileName });
+        profile.comments.push(comment);
         await profile.save();
+
+        user.comments.push(comment._id);
+        await user.save();
+
         res.json({
             message: 'Comment added successfully',
         });
 
     } catch (error) {
-        console.error('Error adding rating:', error);
+        console.error('Error adding comment:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
@@ -124,7 +158,7 @@ router.post('/profileInfo', async (req, res) => {
             return res.status(404).json({ message: 'Profile not found'});
         }
 
-        res.json({ averageRating: profile.averageRating.toFixed(2), numberOfRatings: profile.numberOfRatings });
+        res.json({ averageRating: profile.averageRating.toFixed(2), numberOfRatings: profile.numberOfRatings, imageLink: profile.imageLink });
     } catch (error) {
         console.error('Error fetching profile info:', error);
         res.status(500).json({ message: 'Internal server error' });
