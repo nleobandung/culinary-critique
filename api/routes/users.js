@@ -19,7 +19,9 @@ router.get('/get-comments', async (req, res) => {
         const profiles = await Profile.find({ 'comments._id': { $in: user.comments } })
             .populate('comments', 'username text profileName date').exec();
         
-        const comments = profiles.flatMap(profile => profile.comments);
+        const allComments = profiles.flatMap(profile => profile.comments);
+        const validCommentIds = user.comments.map(id => id.toString());
+        const comments = allComments.filter(comment => validCommentIds.includes(comment._id.toString()));
         res.json({ comments });
     } catch (error) {
         console.error('Error fetching comments:', error);

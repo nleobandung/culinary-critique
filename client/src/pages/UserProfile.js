@@ -42,7 +42,7 @@ function UserProfile() {
             </div>  
         </div>
         <div className="Posts">
-            <UserPosts />
+            <UserPosts data={userComments.comments}/>
         </div>
     </div>
     )
