@@ -1,7 +1,7 @@
 # Culinary Critique
 
 
-_Culinary Critique_ is a **MERN Stack** web application that allows UCLA students to review and rate campus dining halls.
+_Culinary Critique_ is a web application that allows UCLA students to review and rate campus dining halls.
 
 
 ## Table of Contents
