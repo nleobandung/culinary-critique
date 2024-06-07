@@ -76,7 +76,7 @@ const ProfilePage = () => {
     <div className="profile-page-wrapper">
       <header className="ProfilePage-header">
         <h1>{profileName}</h1>
-        <img className="profile-image"src={imageLink} alt="Profile Image" img/>
+        <img className="profile-image"src={imageLink} alt="Profile" img/>
         <div className="rating">
           <span className="star">★</span>
           <span className="star">★</span>

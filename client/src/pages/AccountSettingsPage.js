@@ -7,7 +7,7 @@ import './AccountSettingsPage.css';
 function AccountSettingsPage() {
   const [file, setFile] = useState(null);
   const [photoURL, setPhotoURL] = useState('');
-  const { userData, setUserData } = useContext(UserDataContext);
+  const { userData } = useContext(UserDataContext);
 
   useEffect(() => {
     const fetchProfilePhoto = async () => {

@@ -6,6 +6,8 @@ import { getProfilePhoto } from "../api";
 import { UserDataContext } from "../context/UserDataProvider";
 
 
+
+
 const ProfileCard = () => {
     const [profilePhoto, setProfilePhoto] = useState(null);
     const { userData } = useContext(UserDataContext);
@@ -37,12 +39,12 @@ const ProfileCard = () => {
                 <hr />
                 <div>
                     <div className="followers">
-                        <span>1024</span>
+                        <span>369</span>
                         <span>Followers</span>
                     </div>
 
                     <div className="following">
-                        <span>2</span>
+                        <span>420</span>
                         <span>Following</span>
                     </div>
                 </div>
