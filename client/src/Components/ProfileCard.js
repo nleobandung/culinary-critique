@@ -30,8 +30,7 @@ const ProfileCard = () => {
             </div>
 
             <div className="ProfileName">
-                <span>Gordon Ramsay</span>
-                <span>Senior Chef</span>
+                <span>{userData.username}</span>
             </div>
 
             <div className="followStatus">
