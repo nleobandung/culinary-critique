@@ -1,10 +1,10 @@
 import './background.css'
-import feast from './Media/background.jpg'
+import background from './Media/background.jpeg'
 
 const Background = () => {
     return (
         <div>
-            <img src={feast} className='background' alt="" />
+            <img src={background} className='background' alt="" />
         </div>
     )
 }

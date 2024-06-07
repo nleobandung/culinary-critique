@@ -35,22 +35,6 @@ const ProfileCard = () => {
                 <span>{userData.username}</span>
             </div>
 
-            <div className="followStatus">
-                <hr />
-                <div>
-                    <div className="followers">
-                        <span>369</span>
-                        <span>Followers</span>
-                    </div>
-
-                    <div className="following">
-                        <span>420</span>
-                        <span>Following</span>
-                    </div>
-                </div>
-                <hr />
-            </div>
-
         </div>
     )
 }
