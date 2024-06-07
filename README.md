@@ -1,12 +1,8 @@
 # Culinary Critique
 
-![Culinary Critique Logo](./frontend/src/files/culinary-critique-logo.svg)
 
 _Culinary Critique_ is a **MERN Stack** web application that allows UCLA students to review and rate campus dining halls.
 
-To check a currently deployed version of Culinary Critique, please visit [https://culinarycritique.bliu.tech](https://culinarycritique.bliu.tech).
-
-**Note:** It is recommended to use Culinary Critique on Chrome or Firefox for the best experience.
 
 ## Table of Contents
 - [Features](#features)
