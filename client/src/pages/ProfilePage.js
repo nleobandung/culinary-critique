@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const [numRatings, setNumRatings] = useState(0);
   const [avgRatings, setAvgRatings] = useState(0);
   const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
+  const [imageLink, setImageLink] = useState("");
   const { userData } = useContext(UserDataContext);
   const { name: profileName } = useParams();
 
@@ -17,15 +18,16 @@ const ProfilePage = () => {
     const fetchProfileInfo = async () => {
       if (profileName) {
         try {
-          const { averageRating, numberOfRatings} = await getProfileInfo(profileName);
+          const { averageRating, numberOfRatings, imageLink: photo} = await getProfileInfo(profileName);
           setNumRatings(numberOfRatings);
           setAvgRatings(averageRating);
+          setImageLink(photo);
 
           if (userData.isLoggedIn) {
             const userRating = await getUserRating(userData.username, profileName);
             setRating(userRating);
           }
-
+          
         } catch (error) {
           console.error('Error fetching profile info:', error);
         }
@@ -74,6 +76,7 @@ const ProfilePage = () => {
     <div className="profile-page-wrapper">
       <header className="ProfilePage-header">
         <h1>{profileName}</h1>
+        <img className="profile-image"src={imageLink} alt="Profile Image" img/>
         <div className="rating">
           <span className="star">★</span>
           <span className="star">★</span>
