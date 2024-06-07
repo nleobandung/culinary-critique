@@ -52,7 +52,7 @@ router.post('/change-profile-photo', async (req, res) => {
         if (!user) {
             return res.status(400).json({ message: 'Username not found' });
         }
-        user.profilePhoto = `https://${process.env.S3_BUCKET}.s3.${process.env.REGION}.amazonaws.com/${fileName}`;
+        user.profilePhoto = `https://culinary-critique.s3.us-west-1.amazonaws.com/${fileName}`;
 
         await user.save();
         res.status(200).json({ message: 'Profile photo successfully changed' });

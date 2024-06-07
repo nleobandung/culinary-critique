@@ -25,7 +25,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         }
 
         const params = {
-            Bucket: process.env.S3_BUCKET,
+            Bucket: "culinary-critique",
             Key: file.originalname,
             Body: file.buffer,
         };

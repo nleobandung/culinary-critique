@@ -6,7 +6,7 @@ dotenv.config();
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    profilePhoto: { type: String, default: `https://${process.env.S3_BUCKET}.s3.${process.env.REGION}.amazonaws.com/dog.jpg`},
+    profilePhoto: { type: String, default: `https://culinary-critique.s3.us-west-1.amazonaws.com/dog.jpg`},
     comments: { type: [mongoose.Schema.Types.ObjectId], default: []}
 });
 

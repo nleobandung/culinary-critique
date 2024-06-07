@@ -11,7 +11,7 @@ const ratingSchema = new mongoose.Schema({
 
 const profileSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true},
-    imageLink: { type: String, default: `https://${process.env.S3_BUCKET}.s3.${process.env.REGION}.amazonaws.com/dog.jpg`},
+    imageLink: { type: String, default: `https://culinary-critique.s3.us-west-1.amazonaws.com/dog.jpg`},
     ratings: { type: [ratingSchema], default: [] },
     comments: { type: [Comment.schema], default: [] }
 });
