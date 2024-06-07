@@ -33,5 +33,43 @@ To run a local instance of Culinary Critique, first clone or download a copy of 
 #### Setup
 To set up the dependencies for the backend server, run:
 ```bash
-cd backend
+cd api
 npm install
+```
+which should download a set of `node_modules` for the backend server.
+
+Create a `.env` file in the api folder with the following contents:
+```
+PORT={insert port number}
+ATLAS_URI=mongodb+srv://admin:admin@cluster0.gupgvul.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+```
+
+#### Running
+```
+cd backend
+npm start
+```
+
+### Frontend Instructions
+#### Setup
+To setup the dependencies for the frontend application, first create a new instance of terminal, then run:
+```
+cd client
+npm install
+```
+which should download a set of `node_modules` for the backend server.
+
+Create a `.env` file in the client folder with the following contents:
+```
+REACT_APP_PORT={insert port number}
+```
+
+#### Running
+To start the frontend application, run:
+```
+cd client
+npm start
+```
+
+## Authors
+_Culinary Critique_ was made as a project for **CS 35L** taught by Professor Paul Eggert at UCLA in Spring 2024. **Made by**: Duncan Hackmann, Marco Lombardi, Nathan Leobandung, Brian Mui, and Rabbun Ishmam Haider
