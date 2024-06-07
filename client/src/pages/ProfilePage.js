@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProfileInfo, rateProfile, getUserRating } from '../api.js';
 import "./ProfilePage.css";
-import deNeveAvatar from '../Components/Media/foods/neve.jpg';
 import CommentsSection from '../Components/CommentsSection';
 import { UserDataContext } from "../context/UserDataProvider";
 
