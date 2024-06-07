@@ -11,6 +11,55 @@ const FollowersWidget = ({user, Followers}) => {
         setValue(newValue);
     }
 
+    //KEY
+    //0: follower
+    //1: following
+    //2: both
+    const handleFollowers = (follower) => {
+        //change the status to 2 if status is 0
+        if(follower.status == 2) {
+            follower.status = 0;
+        }
+                //change the status to 0 if status is 2
+        else{
+            follower.status = 2;
+        }
+    }
+
+    const handleFollowing = () => {
+
+    }
+
+    const handleSuggested = () => {
+
+    }
+
+    function getFollowers(followers) {
+        const ret = [];
+        //given an array of Followers, output just the status = 0 or status = 2
+        for(let i = 0; i < followers.length; i++) {
+            if(followers[i].status == 0 || followers[i].status == 2) {
+                ret.push(followers[i])
+            }
+        }
+        return ret;
+    }
+
+    function getFollowing(followers) {
+        const ret = [];
+        //given an array of Followers, output just the status = 0 or status = 2
+        for(let i = 0; i < followers.length; i++) {
+            if(followers[i].status == 1 || followers[i].status == 2) {
+                ret.push(followers[i])
+            }
+        }
+        return ret;
+    }
+
+    function getSuggested() {
+
+    }
+
     return(
         <div className="FollowersCard">
             <TabContext value={value}>
@@ -23,7 +72,7 @@ const FollowersWidget = ({user, Followers}) => {
                 </Box>
                 <TabPanel value="1">
                     <div className="FollowersList">
-                        {Followers.map((follower, id)=>{
+                        {getFollowers(Followers).map((follower, id)=>{
                         return(
                             <div className="follower">
                                 <img src={follower.img} alt="" className="profimg"/>
@@ -33,8 +82,8 @@ const FollowersWidget = ({user, Followers}) => {
                                         <span>@{follower.username}</span>
                                     </div>
                                 </div>
-                                <button className="followbutton">
-                                    Follow
+                                <button className="followbutton" onClick={handleFollowers(follower)}>
+                                    {follower.status? "Follow" : "Following"}
                                 </button>
                             </div>
                         )
@@ -43,7 +92,7 @@ const FollowersWidget = ({user, Followers}) => {
                 </TabPanel>
                 <TabPanel value="2">
                     <div className="FollowingList">
-                        {Followers.map((follower, id)=>{
+                        {getFollowing(Followers).map((follower, id)=>{
                         return(
                             <div className="follower">
                                 <img src={follower.img} alt="" className="profimg"/>
@@ -54,7 +103,7 @@ const FollowersWidget = ({user, Followers}) => {
                                     </div>
                                 </div>
                                 <button className="followbutton">
-                                    Follow
+                                    Unfollow
                                 </button>
                             </div>
                         )
@@ -62,7 +111,8 @@ const FollowersWidget = ({user, Followers}) => {
                     </div>
                 </TabPanel>
                 <TabPanel value="3">
-                    <div className="SuggestedList">
+                    <div>tbd</div>
+                    {/* <div className="SuggestedList">
                         {Followers.map((follower, id)=>{
                         return(
                             <div className="follower">
@@ -79,7 +129,7 @@ const FollowersWidget = ({user, Followers}) => {
                             </div>
                         )
                         })}
-                    </div>
+                    </div> */}
                 </TabPanel>
             </TabContext>
             <form>

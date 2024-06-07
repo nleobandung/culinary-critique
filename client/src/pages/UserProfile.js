@@ -19,19 +19,27 @@ function compileFollowData(usernames, ids, stati) {
     return Follow;
 };
 
-function compileFollowers() {
-
-}
-
-function compileFOllowing() {
-
-}
-
+// function sendCardData(followers, name, nickname) {
+//     numFollow = 0;
+//     for(let i = 0; i < followers.length; i++) {
+//         if(followers[i].status == 0 || followers[i].status == 2) {
+//             numFollow += 1;
+//         }
+//     }
+//     numFollowers = 0;
+//     for(let i = 0; i < followers.length; i++) {
+//         if(followers[i].status == 1 || followers[i].status == 2) {
+//             numFollowers += 1;
+//         }
+//     }
+//     const ret = {numFollowers: numFollow, numFollowing: numFollowers, user: name, displayName: nickname};
+// }
 
 function UserProfile() {
 
     //enumerate constants
     const [user, setUser] = useState("bryan");
+    const [userNickName, setUserNickName] = useState("")
     const [followers, setFollowers] = useState([]);
 
     //handle getting the data
@@ -54,7 +62,7 @@ function UserProfile() {
             console.error("Error fetching user profiles", error);
         }
     }
-
+    
 
 
     return(
@@ -62,7 +70,7 @@ function UserProfile() {
         <div className="Profile">
             <div />
             <div className="User">
-                <ProfileCard />
+                <ProfileCard username={user}/>
             </div>
             <div className="Followers">
                 <FollowersWidget user={user} Followers={followers}/>

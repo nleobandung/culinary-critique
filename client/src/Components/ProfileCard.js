@@ -32,20 +32,19 @@ const ProfileCard = () => {
             </div>
 
             <div className="ProfileName">
-                <span>Gordon ramsay</span>
-                <span>Senior Chef</span>
+                <span>Gordon Rams</span>
             </div>
 
             <div className="followStatus">
                 <hr />
                 <div>
                     <div className="followers">
-                        <span>1024</span>
+                        <span>369</span>
                         <span>Followers</span>
                     </div>
 
                     <div className="following">
-                        <span>2</span>
+                        <span>420</span>
                         <span>Following</span>
                     </div>
                 </div>
