@@ -3,13 +3,11 @@ import ProfileCard from "../Components/ProfileCard"
 import "./UserProfile.css"
 import UserPosts from "../Components/UserPosts"
 import FollowersWidget from "../Components/Followers"
-import {getDisplayName} from '../api.js'
 import { getUserComments } from "../api.js";
 import { UserDataContext } from '../context/UserDataProvider.js';
 
 
 function UserProfile() {
-    const [displayNames, setDisplayNames] = useState([]);
     const [userComments, setUserComments] = useState([]);
     const { userData } = useContext(UserDataContext);
 
@@ -19,9 +17,6 @@ function UserProfile() {
 
     const getData = async() => {
         try{
-            const data = await getDisplayName();
-            setDisplayNames(data);
-
             const comments = await getUserComments(userData.username);
             setUserComments(comments);
         }
