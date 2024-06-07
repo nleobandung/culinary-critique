@@ -317,25 +317,3 @@ export const createProfile = async (profileName) => {
     throw error;
   }
 };
-
-///////////////////////////////////////////////////////////////////////////
-//  API calls for user profiles
-///////////////////////////////////////////////////////////////////////////
-
-//fetching users' display names
-export const getDisplayName = async () => {
-  try {
-    const response = await fetch(`${API_URL}/users/usr`);
-
-    if (!response.ok) {
-      throw new Error(`Error retrieving display names: ${response.statusText}`);
-    }
-
-    const names = await response.json();
-    return names;
-
-  } catch (error) {
-    console.error('Error retrieving display names:', error);
-    throw error;
-  }
-}
