@@ -135,12 +135,13 @@ router.get('/usr/display-names', async (req, res) => {
     }
 });
 
+////////FOLLOWERS
+
 ////get followers data 
 //followers status array
 router.get('/usr/followers/status', async (req, res) => {
     try {
-        console.log("DEEZ NUTZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
-
+        console.log("decoding1..")
         const user = await User.findOne({username: req.query.username});
         const followers = user.followers;
         const stati = followers.map(follower => follower.status);
@@ -151,11 +152,10 @@ router.get('/usr/followers/status', async (req, res) => {
     }
 });
 
-export default router;
 //followers id array
 router.get('/usr/followers/id', async (req, res) => {
     try {
-        console.log("FETCH ID")
+        console.log("decoding2..")
 
         const user = await User.findOne({username: req.query.username});
         const followers = user.followers;
@@ -166,20 +166,16 @@ router.get('/usr/followers/id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 //followers decoded usernames
 //{_id: ObjectId("666226ab7db1d52a5a4246b0")}
 router.get('/usr/followers/usernames', async (req, res) => {
     try {
-        console.log("FETCH USERNAMES")
-        // const idTag = "666226ab7db1d52a5a4246b0"
-        // const objectId = new ObjectId(idTag)
-        // const user = await User.findById(objectId)
+        console.log("decoding3..")
         const user = await User.findOne({username: req.query.username});
         const followers = user.followers;
         const ids = followers.map(follower => follower.followerID);
-        // const usernames = Promise.all(id.map( async (id) => {
-        //     id = 369
-        // }));
+
         const objectIDs = ids.map(id => {
             if (ObjectId.isValid(id)) {
             return new ObjectId(id);
@@ -190,13 +186,42 @@ router.get('/usr/followers/usernames', async (req, res) => {
         const users = await User.find({ _id: { $in: objectIDs } }, 'username');
         const usernames = users.map(user => user.username);
 
-        usernames.forEach(function(entry) {
-            console.log(entry);
-        });
         res.json(usernames);
     } catch (error) {
         console.error('Error fetching follower usernames:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+//followers decoded profile photos
+router.get('/usr/followers/photos', async (req, res) => {
+    try {
+        console.log("decoding4..")
+        const user = await User.findOne({username: req.query.username});
+        const followers = user.followers;
+        const ids = followers.map(follower => follower.followerID);
+
+        const objectIDs = ids.map(id => {
+            if (ObjectId.isValid(id)) {
+            return new ObjectId(id);
+            } else {
+            throw new Error(`Invalid ID: ${id}`);
+            }
+        });
+        const users = await User.find({ _id: { $in: objectIDs } }, 'profilePhoto');
+        const profPhotos = users.map(user => user.profilePhoto);
+
+        profPhotos.forEach(function(entry) {
+            console.log(entry)  
+        });
+
+        res.json(profPhotos);
+    } catch (error) {
+        console.error('Error fetching follower profile photos:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+export default router;
 

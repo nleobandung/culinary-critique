@@ -388,7 +388,7 @@ export const getFollowersID = async (user) => {
   }
 }
 
-//fetching user ids
+//fetching followers usernames
 export const getFollowersUser = async (user) => {
   try {
 
@@ -398,11 +398,30 @@ export const getFollowersUser = async (user) => {
       throw new Error(`Error retrieving followers usernames: ${response.statusText}`);
     }
 
-    const ids = await response.json();
-    return ids;
+    const usernames = await response.json();
+    return usernames;
 
   } catch (error) {
     console.error('Error retrieving followers usernames:', error);
+    throw error;
+  }
+}
+
+//fetching user profile photos
+export const getFollowersPhotos = async (user) => {
+  try {
+
+    const response = await fetch(`${API_URL}/users/usr/followers/photos?username=${encodeURIComponent(user)}`);
+
+    if (!response.ok) {
+      throw new Error(`Error retrieving followers photos: ${response.statusText}`);
+    }
+
+    const photos = await response.json();
+    return photos;
+
+  } catch (error) {
+    console.error('Error retrieving followers photos:', error);
     throw error;
   }
 }

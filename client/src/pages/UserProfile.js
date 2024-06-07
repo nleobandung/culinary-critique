@@ -8,16 +8,17 @@ import {getDisplayName} from '../api.js'
 import { getFollowers } from "../api.js";
 import { getFollowersID } from "../api.js";
 import { getFollowersUser } from "../api.js";
+import { getFollowersPhotos } from "../api.js";
 import img1 from "../Components/Media/logos/Logo_Feast.jpg"
 
 import { getUserComments } from "../api.js";
 import { UserDataContext } from '../context/UserDataProvider.js';
 
 
-function compileFollowData(usernames, ids, stati) {
+function compileFollowData(usernames, ids, stati, photos) {
     const Follow = [];
     for(let i = 0; i < stati.length; i++) {
-        Follow.push({username: usernames[i], id: ids[i], status: stati[i], img: img1, name: "Student"})
+        Follow.push({username: usernames[i], id: ids[i], status: stati[i], img: photos[i]})
     }
     return Follow;
 };
@@ -44,37 +45,47 @@ function UserProfile() {
     const [userComments, setUserComments] = useState([]);
     const { userData } = useContext(UserDataContext);
 
-
     //enumerate constants
     const [user, setUser] = useState("bryan");
     const [userNickName, setUserNickName] = useState("")
     const [followers, setFollowers] = useState([]);
+    //const [photos, setPhotos] = useState([]);
 
     //handle getting the data
     useEffect(() => {
         getData();
     }, [userData.username, userComments]);
 
-    const getData = async() => {
-        try{
+    useEffect(() => {
+        getF();
+    }, []);
 
+    const getF = async() => {
+        try{
             const status = await getFollowers(user);
     
             const ids = await getFollowersID(user);
-
-            const usernames = await getFollowersUser(user);
     
-            const data = compileFollowData(usernames, ids, status);
-            setFollowers(data);
+            const usernames = await getFollowersUser(user);
 
-            const data = await getDisplayName();
-            setDisplayNames(data);
+            const photos = await getFollowersPhotos(user);
+    
+            const data1 = compileFollowData(usernames, ids, status, photos);
+            setFollowers(data1);
+        }
+        catch (error){
+            console.error("Error fetching user profiles", error);
+        }
 
+    }
+
+    const getData = async() => {
+        try{
             const comments = await getUserComments(userData.username);
             setUserComments(comments);
         }
         catch (error){
-            console.error("Error fetching user profiles", error);
+            console.error("Error fetching user data", error);
         }
     }
     

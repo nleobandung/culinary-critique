@@ -75,11 +75,11 @@ const FollowersWidget = ({user, Followers}) => {
                         {getFollowers(Followers).map((follower, id)=>{
                         return(
                             <div className="follower">
-                                <img src={follower.img} alt="" className="profimg"/>
+                                <img src={follower.img} alt="unknown" className="profimg"/>
                                 <div>
                                     <div className="Name">
-                                        <span>{follower.name}</span>
                                         <span>@{follower.username}</span>
+                                        <span></span>
                                     </div>
                                 </div>
                                 <button className="followbutton" onClick={handleFollowers(follower)}>
@@ -95,10 +95,9 @@ const FollowersWidget = ({user, Followers}) => {
                         {getFollowing(Followers).map((follower, id)=>{
                         return(
                             <div className="follower">
-                                <img src={follower.img} alt="" className="profimg"/>
+                                <img src={follower.img} alt="err" className="profimg"/>
                                 <div>
                                     <div className="Name">
-                                        <span>{follower.name}</span>
                                         <span>@{follower.username}</span>
                                     </div>
                                 </div>
