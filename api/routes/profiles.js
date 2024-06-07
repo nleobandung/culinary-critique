@@ -73,7 +73,7 @@ router.post('/addComment', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const comment = new Comment({ username, text });
+        const comment = new Comment({ username, text, profileName });
         profile.comments.push(comment);
         await profile.save();
 
@@ -85,7 +85,7 @@ router.post('/addComment', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error adding rating:', error);
+        console.error('Error adding comment:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
