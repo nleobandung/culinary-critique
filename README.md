@@ -28,7 +28,7 @@ _Culinary Critique_ is a web application that allows UCLA students to review and
 
 ## Setup
 
-To run a local instance of Culinary Critique, first clone or download a copy of this repository. Follow the instructions below to initialize a local instance of each part of the application.
+To run a local instance of Culinary Critique, first clone or download a copy of this repository and navigate to the new folder `culinary-critique`. Follow the instructions below to initialize a local instance of each part of the application.
 
 ### Backend Instructions
 #### Setup
@@ -43,6 +43,8 @@ Create a `.env` file in the api folder with the following contents:
 ```
 PORT={insert port number}
 ATLAS_URI={insert mongoDB link}
+S3_ACCESS_KEY={insert S3 access key}
+S3_SECRET_ACCESS_KEY={insert secret S3 secret key}
 ```
 
 #### Running
