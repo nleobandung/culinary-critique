@@ -26,7 +26,7 @@ function AccountSettingsPage() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
+    if (file && (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png')) {
       setFile(file);
     } else {
       alert('Please select a JPG file.');
