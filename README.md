@@ -73,6 +73,12 @@ To start the frontend application, in the client terminal, run:
 ```bash
 npm start
 ```
+## Citations
+aws-sdk tutorial for react: https://medium.com/how-to-react/how-to-upload-files-on-an-s3-bucket-in-react-js-97a3ccd519d1
+
+Aws-sdk migration from v2 to v3: https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/migrating.html
+
+
 
 ## Authors
 _Culinary Critique_ was made as a project for **CS 35L** taught by Professor Paul Eggert at UCLA in Spring 2024. **Made by**: Duncan Hackmann, Marco Lombardi, Nathan Leobandung, Brian Mui, and Rabbun Ishmam Haider
