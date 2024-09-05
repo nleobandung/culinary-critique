@@ -81,4 +81,4 @@ Aws-sdk migration from v2 to v3: https://docs.aws.amazon.com/sdk-for-javascript/
 
 
 ## Authors
-_Culinary Critique_ was made as a project for **CS 35L** taught by Professor Paul Eggert at UCLA in Spring 2024. **Made by**: Duncan Hackmann, Marco Lombardi, Nathan Leobandung, Brian Mui, and Rabbun Ishmam Haider
+_Culinary Critique_ was made as a project for **CS 35L** taught by Professor Paul Eggert at UCLA in Spring 2024. **Made by**: Duncan Hackmann, Marco Lombardi, Nathan Leobandung, Bryan Mui, and Rabbun Ishmam Haider
